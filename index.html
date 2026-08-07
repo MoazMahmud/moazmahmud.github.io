@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moaz Mahmud</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+  :root{
+    --warm-dim:#7A5A34;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(94,234,212,0.06), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(242,166,90,0.04), transparent 60%);
+    background-attachment:fixed;
+  }
+
+  /* subtle grid texture on background */
+  .grid-texture{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 100% 60% at 50% 0%, black 0%, transparent 75%);
+  }
+
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,14,19,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .logo{
+    font-family:var(--font-mono); font-size:14px; letter-spacing:0.5px;
+    color:var(--text); display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .nav-links{display:flex; gap:36px; font-size:14px;}
+  .nav-links a{
+    color:var(--text-dim); position:relative; padding:4px 0;
+    transition:color 0.2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--text);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px;
+    background:var(--accent); transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a:focus-visible::after{width:100%;}
+  .nav-toggle{display:none;}
+
+  /* HERO */
+  #hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    justify-content:center; padding-top:68px; overflow:hidden;
+  }
+  #hilbert-svg{
+    position:absolute; top:50%; right:-6%; transform:translateY(-50%);
+    width:640px; height:640px; opacity:0.16; z-index:0;
+    stroke:var(--accent); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+  }
+  #hilbert-svg path{
+    stroke-dasharray:6000;
+    stroke-dashoffset:6000;
+    animation:draw 3.2s cubic-bezier(0.65,0,0.35,1) 0.3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .hero-inner{position:relative; z-index:1;}
+
+  h1.name{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(42px, 7vw, 84px); line-height:1.02; letter-spacing:-0.02em;
+    max-width:800px;
+  }
+  .role-line{
+    font-family:var(--font-display); font-weight:500; font-size:clamp(20px,2.6vw,28px);
+    color:var(--text-dim); margin-top:18px;
+  }
+  .role-line span{color:var(--accent);}
+
+  .hero-desc{
+    max-width:560px; color:var(--text-dim); font-size:16px; margin-top:24px;
+  }
+
+  .hero-links{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+  .hero-subLinks{display:flex; gap:24px; margin-top:22px; flex-wrap:wrap;}
+  .hero-subLinks a{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-faint);
+    display:inline-flex; align-items:center; gap:6px; transition:color 0.2s ease;
+  }
+  .hero-subLinks a:hover{color:var(--accent);}
+  .hero-subLinks a::before{content:'↗'; font-size:11px;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; padding:12px 22px;
+    border-radius:3px; border:1px solid var(--border); transition:all 0.2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn.primary{background:var(--accent); color:#06120F; border-color:var(--accent); font-weight:500;}
+  .btn.primary:hover{background:#7FF2DE; box-shadow:0 0 24px rgba(94,234,212,0.25);}
+  .btn.ghost{color:var(--text-dim);}
+  .btn.ghost:hover{border-color:var(--text-dim); color:var(--text);}
+
+  /* READOUT STRIP */
+  .readout{
+    margin-top:68px; display:grid; grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);
+  }
+  .readout-item{
+    padding:22px 26px; border-right:1px solid var(--border-soft);
+  }
+  .readout-item:last-child{border-right:none;}
+  .readout-val{
+    font-family:var(--font-mono); font-size:26px; color:var(--text); font-weight:600;
+  }
+  .readout-val small{color:var(--accent); font-size:16px;}
+  .readout-label{
+    font-size:12px; color:var(--text-faint); margin-top:6px; text-transform:uppercase; letter-spacing:0.4px;
+  }
+
+  /* SECTION GENERIC */
+  section{position:relative; z-index:1; padding:120px 0;}
+  .section-head{display:flex; align-items:baseline; gap:18px; margin-bottom:56px;}
+  .section-num{font-family:var(--font-mono); color:var(--text-faint); font-size:13px;}
+  .section-title{font-family:var(--font-display); font-weight:600; font-size:32px;}
+
+  /* ABOUT */
+  #about .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:64px;}
+  #about p{color:var(--text-dim); margin-bottom:18px; font-size:15.5px;}
+  #about p strong{color:var(--text); font-weight:500;}
+  .about-side{
+    border-left:1px solid var(--border); padding-left:32px;
+  }
+  .fact{margin-bottom:26px;}
+  .fact-label{font-family:var(--font-mono); font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:6px;}
+  .fact-val{font-size:14.5px; color:var(--text-dim);}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{position:relative; padding-left:36px;}
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(to bottom, var(--accent), var(--border) 90%);
+  }
+  .role-block{position:relative; margin-bottom:64px;}
+  .role-block:last-child{margin-bottom:0;}
+  .role-block::before{
+    content:''; position:absolute; left:-36px; top:6px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--accent);
+  }
+  .role-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
+  .role-title{font-family:var(--font-display); font-size:21px; font-weight:600;}
+  .role-period{font-family:var(--font-mono); font-size:12.5px; color:var(--text-faint);}
+  .role-org{color:var(--warm); font-size:14.5px; margin-bottom:22px; font-weight:500;}
+
+  .project-block{margin-bottom:26px;}
+  .project-block:last-child{margin-bottom:0;}
+  .project-name{
+    font-size:14.5px; color:var(--text); margin-bottom:4px; font-weight:500;
+  }
+  .project-stack{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-bottom:10px;
+  }
+  .project-block ul{list-style:none; padding:0;}
+  .project-block li{
+    position:relative; padding-left:18px; color:var(--text-dim); font-size:14.5px;
+    margin-bottom:8px;
+  }
+  .project-block li::before{
+    content:'—'; position:absolute; left:0; color:var(--text-faint);
+  }
+  .project-block li .stat{color:var(--accent); font-family:var(--font-mono); font-weight:500;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border);}
+  .skill-cat{background:var(--bg); padding:26px 28px;}
+  .skill-cat h3{
+    font-family:var(--font-mono); font-size:12px; color:var(--warm); text-transform:uppercase;
+    letter-spacing:0.6px; margin-bottom:14px;
+  }
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
+    padding:5px 10px; border:1px solid var(--border); border-radius:3px;
+    transition:all 0.2s ease;
+  }
+  .skill-cat:hover .chip{border-color:var(--border-soft);}
+  .chip:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* PROJECTS */
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .proj-card{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px;
+    padding:26px; transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .proj-card:hover{transform:translateY(-4px); border-color:var(--accent-dim);}
+  .proj-card h3{font-family:var(--font-display); font-size:17px; margin-bottom:8px;}
+  .proj-card .project-stack{margin-bottom:12px;}
+  .proj-card p{font-size:13.5px; color:var(--text-dim); margin-bottom:16px; min-height:60px;}
+  .proj-links{display:flex; gap:14px; font-family:var(--font-mono); font-size:12px;}
+  .proj-links a{color:var(--accent);}
+  .proj-links a:hover{text-decoration:underline;}
+
+  /* EDUCATION */
+  .edu-card{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:28px 0; border-top:1px solid var(--border-soft);
+    flex-wrap:wrap; gap:8px;
+  }
+  .edu-degree{font-family:var(--font-display); font-size:19px; font-weight:600;}
+  .edu-org{color:var(--text-dim); font-size:14.5px; margin-top:4px;}
+  .edu-period{font-family:var(--font-mono); font-size:12.5px; color:var(--text-faint);}
+
+  /* CONTACT / FOOTER */
+  #contact{padding-bottom:80px;}
+  .contact-box{
+    background:var(--bg-elevated); border:1px solid var(--border); border-radius:8px;
+    padding:64px 56px; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-box h2{
+    font-family:var(--font-display); font-size:clamp(28px,4vw,42px); font-weight:600; margin-bottom:16px;
+  }
+  .contact-box p{color:var(--text-dim); max-width:460px; margin:0 auto 32px;}
+  .contact-links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+
+  footer{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:40px; margin-top:40px; border-top:1px solid var(--border-soft);
+    font-size:13px; color:var(--text-faint); flex-wrap:wrap; gap:12px;
+  }
+  footer .foot-links{display:flex; gap:20px;}
+  footer a:hover{color:var(--accent);}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr !important; gap:36px !important;}
+    .about-side{border-left:none; padding-left:0; border-top:1px solid var(--border); padding-top:28px;}
+    .readout{grid-template-columns:repeat(2,1fr);}
+    .readout-item:nth-child(2){border-right:none;}
+    .skills-grid{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    #hilbert-svg{opacity:0.08; width:420px; height:420px;}
+    .nav-links{display:none;}
+    .contact-box{padding:44px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-texture"></div>
+
+<header>
+  <nav class="wrap">
+    <a href="#hero" class="logo"><span class="dot"></span>MOAZ MAHMUD</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section id="hero">
+    <svg id="hilbert-svg" viewBox="0 0 512 512" aria-hidden="true"><path id="hilbert-path" d=""/></svg>
+    <div class="hero-inner">
+      <div class="eyebrow">DHAKA, BANGLADESH — AVAILABLE FOR SELECT WORK</div>
+      <h1 class="name">Moaz Mahmud</h1>
+      <div class="role-line">Senior Software Engineer, building <span>backend systems that scale.</span></div>
+      <p class="hero-desc">I design and ship high-throughput backend systems and the data pipelines, retrieval layers, and tooling around them — currently at Enosis Solutions, previously at REVE Systems.</p>
+      <div class="hero-links">
+        <a href="#contact" class="btn primary">Get in touch →</a>
+        <a href="#experience" class="btn ghost">View experience</a>
+      </div>
+      <div class="hero-subLinks">
+        <a href="youtube.html">YouTube Lectures</a>
+        <a href="https://mzmahmud.blogspot.com/">Blog</a>
+      </div>
+    </div>
+
+    <div class="readout reveal">
+      <div class="readout-item">
+        <div class="readout-val">95<small>%</small></div>
+        <div class="readout-label">Faster CSV ingestion</div>
+      </div>
+      <div class="readout-item">
+        <div class="readout-val">90<small>%</small></div>
+        <div class="readout-label">Faster test-script authoring</div>
+      </div>
+      <div class="readout-item">
+        <div class="readout-val">1M<small>+/day</small></div>
+        <div class="readout-label">Notifications shipped in production</div>
+      </div>
+      <div class="readout-item">
+        <div class="readout-val">2x</div>
+        <div class="readout-label">Faster deployments via CI</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head"><span class="section-num">01</span><span class="section-title">About</span></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a <strong>backend-leaning full-stack engineer</strong> based in Dhaka, currently a Senior Software Engineer at <strong>Enosis Solutions</strong>, where I work on engineering-simulation data platforms, similarity search over legal case data, and LLM-assisted test authoring — mostly in Java, Spring Boot, TypeScript and Python.</p>
+        <p>Before that, at <strong>REVE Systems</strong>, I built and led delivery on government-scale systems — office management tools for Bangladesh's Parliament, a bond-license automation platform for 10,000+ users, and a notification system moving roughly a million messages a day.</p>
+        <p>I grew up moving around Bangladesh — Chittagong, Dhaka, Jashore — following my father's postings, before studying Computer Science and Engineering at <strong>BUET</strong>. That early exposure to different environments still shows up in how I work: comfortable across unfamiliar codebases, teams, and problem domains.</p>
+        <p>Outside of production work, I'm a long-time competitive-math and olympiad person — a founding member of Trivuj Math Club and an academic member of the Bangladesh Mathematical Olympiad Committee — and I teach, having recorded 70+ hours of Bangla-language CS and math lectures on YouTube.</p>
+      </div>
+      <div class="about-side reveal">
+        <div class="fact">
+          <div class="fact-label">Currently</div>
+          <div class="fact-val">Senior Software Engineer @ Enosis Solutions</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Focus</div>
+          <div class="fact-val">Backend systems, data pipelines, LLM tooling</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Education</div>
+          <div class="fact-val">B.Sc. CSE, BUET (2016–2021)</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Also</div>
+          <div class="fact-val">Math olympiad organizer &amp; educator, 70+ lecture hours online</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="section-num">02</span><span class="section-title">Experience</span></div>
+    <div class="timeline">
+
+      <div class="role-block reveal">
+        <div class="role-top">
+          <div class="role-title">Senior Software Engineer</div>
+          <div class="role-period">03/2023 — Present</div>
+        </div>
+        <div class="role-org">Enosis Solutions, Dhaka, Bangladesh</div>
+
+        <div class="project-block">
+          <div class="project-name">Engineering Simulation Data Visualization Platform</div>
+          <div class="project-stack">Java Spring Boot · WebFlux · MongoDB · Kafka · Angular</div>
+          <ul>
+            <li>Cut CSV import time by <span class="stat">95%</span> (40 min → 2 min) by streaming and parsing with backpressure and batch writes.</li>
+            <li>Stabilized MongoDB writes by eliminating latency spikes via a row-level ingestion buffer.</li>
+            <li>Reduced peak load by replacing a heavy cron job with an event-driven space-usage service.</li>
+          </ul>
+        </div>
+
+        <div class="project-block">
+          <div class="project-name">Similarity Search &amp; Retrieval</div>
+          <div class="project-stack">TypeScript · Node · Express · GraphQL · Postgres · Qdrant · LangChain · Ollama</div>
+          <ul>
+            <li>Lowered LLM cost and latency (<span class="stat">−35%</span> tokens, <span class="stat">+20%</span> embedding speed) by flattening JSON into concise GraphQL text.</li>
+            <li>Improved case retrieval accuracy by integrating Hugging Face embeddings in Qdrant via LangChain.</li>
+          </ul>
+        </div>
+
+        <div class="project-block">
+          <div class="project-name">Autonomous Test Authoring</div>
+          <div class="project-stack">Node · Express · Playwright · Python · FastAPI · LangChain · Ollama</div>
+          <ul>
+            <li>Cut test-planning time by <span class="stat">70%</span> by auto-crawling the app and using local LLMs to suggest test steps.</li>
+            <li>Accelerated Playwright script creation by <span class="stat">90%</span>, generating runnable tests from those steps with local models (DeepSeek-R1, Qwen-Code).</li>
+          </ul>
+        </div>
+
+        <div class="project-block">
+          <div class="project-name">Web-Based Outlook Add-In</div>
+          <div class="project-stack">React · TypeScript · Node · Express · Microsoft Graph API</div>
+          <ul>
+            <li>Expanded adoption by rewriting a legacy COM add-in into a cross-platform web add-in.</li>
+            <li>Streamlined add-in development with a reusable React/Node/TypeScript monorepo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role-block reveal">
+        <div class="role-top">
+          <div class="role-title">Software Engineer</div>
+          <div class="role-period">02/2021 — 03/2023</div>
+        </div>
+        <div class="role-org">REVE Systems, Dhaka, Bangladesh</div>
+
+        <div class="project-block">
+          <div class="project-name">Office Management System</div>
+          <div class="project-stack">Java Servlet · Vanilla JS · jQuery · MySQL · Jenkins</div>
+          <ul>
+            <li>Led a team of 3 junior engineers, delivering feedback and bug fixes <span class="stat">2 months</span> ahead of deadline.</li>
+            <li>Built a Jenkins pipeline for automated deployment, halving deployment time.</li>
+            <li>Fixed a connection-leak bug in the internal DB connection framework, eliminating deadlocks.</li>
+          </ul>
+        </div>
+
+        <div class="project-block">
+          <div class="project-name">Application Automation System</div>
+          <div class="project-stack">Java Spring Boot · Oracle · Thymeleaf</div>
+          <ul>
+            <li>Integrated an internal HTML-to-PDF API, cutting PDF size by <span class="stat">30%</span> with improved quality.</li>
+            <li>Architected a multi-channel notification platform (email, SMS, in-app) handling ~<span class="stat">1M</span> messages/day.</li>
+          </ul>
+        </div>
+
+        <div class="project-block">
+          <div class="project-name">Enterprise Resource Planning Solution</div>
+          <div class="project-stack">Java Servlet · Vanilla JS · jQuery · MySQL</div>
+          <ul>
+            <li>Built two reusable vanilla-JS components, cutting boilerplate <span class="stat">10%</span>, adopted by 3 teams.</li>
+            <li>Modernized 20% of the codebase with Java Streams, improving maintainability.</li>
+            <li>Batched fetching in the reporting framework, eliminating N+1 queries and cutting generation time <span class="stat">50%</span>.</li>
+            <li>Delivered 10 training sessions, upskilling 200+ non-technical client staff.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="section-num">03</span><span class="section-title">Skills</span></div>
+    <div class="skills-grid reveal">
+      <div class="skill-cat">
+        <h3>Languages</h3>
+        <div class="chip-row"><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Python</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Backend</h3>
+        <div class="chip-row"><span class="chip">Spring Boot</span><span class="chip">WebFlux</span><span class="chip">Spring Data JPA</span><span class="chip">Hibernate</span><span class="chip">Node</span><span class="chip">Express</span><span class="chip">GraphQL</span><span class="chip">FastAPI</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Frontend</h3>
+        <div class="chip-row"><span class="chip">React</span><span class="chip">Angular</span><span class="chip">jQuery</span><span class="chip">Bootstrap</span><span class="chip">Thymeleaf</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Data &amp; Messaging</h3>
+        <div class="chip-row"><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">Oracle</span><span class="chip">MS SQL Server</span><span class="chip">MongoDB</span><span class="chip">Qdrant</span><span class="chip">Kafka</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>AI / LLM</h3>
+        <div class="chip-row"><span class="chip">LangChain</span><span class="chip">Ollama</span></div>
+      </div>
+      <div class="skill-cat">
+        <h3>Build, Test &amp; Ops</h3>
+        <div class="chip-row"><span class="chip">Maven</span><span class="chip">Gradle</span><span class="chip">Docker</span><span class="chip">JUnit</span><span class="chip">Playwright</span><span class="chip">Jest</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head"><span class="section-num">04</span><span class="section-title">Selected Projects</span></div>
+    <div class="proj-grid reveal">
+
+      <div class="proj-card">
+        <h3>Hilbert Curve Space-Filler</h3>
+        <div class="project-stack">p5.js · JavaScript · HTML/CSS</div>
+        <p>An interactive space-filling curve renderer — draws successive orders of the Hilbert curve across a 512×512 canvas, and can map any uploaded image through it as an artistic filter.</p>
+        <div class="proj-links">
+          <a href="https://moazmahmud.github.io/fill-2d-space-with-hilbert-curve/">Live demo</a>
+          <a href="https://github.com/MoazMahmud/fill-2d-space-with-hilbert-curve">Source</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>2D Ray Tracer &amp; Graphics Sandbox</h3>
+        <div class="project-stack">C++ · OpenGL · OOP</div>
+        <p>A graphics-programming sandbox built on OpenGL: a two-axis control wheel, a 2D ray tracer, a custom shader, and fractal animations.</p>
+        <div class="proj-links">
+          <a href="https://github.com/MoazMahmud/Computer_Graphics_Sessional_CSE_410">Source</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Bangladeshi Number Format Util</h3>
+        <div class="project-stack">Java · Java Streams · JavaScript</div>
+        <p>A small library converting Bangla or English numeric strings into the Crore-Lakh format — with APIs to both format numbers and spell them out in words.</p>
+        <div class="proj-links">
+          <a href="https://github.com/MoazMahmud/bangladehi-number-format-util">Source</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Multi-Select Table</h3>
+        <div class="project-stack">HTML · CSS · Bootstrap · JavaScript</div>
+        <p>A JSON-driven table component where rows can be selected and moved between two tables, backed by a JS Map for fast lookups of the selected set.</p>
+        <div class="proj-links">
+          <a href="/showcase/multi-select-table.html">Live demo</a>
+          <a href="https://github.com/MoazMahmud/web-tuk-tak/blob/master/multi-select-table.html">Source</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Tic-Tac-Toe AI</h3>
+        <div class="project-stack">Python · PyGame · Minimax</div>
+        <p>An unbeatable Tic-Tac-Toe opponent built with the minimax algorithm, with gameplay rendered in PyGame.</p>
+        <div class="proj-links">
+          <a href="https://github.com/MoazMahmud/Tic-Tac-Toe">Source</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Mancala Player</h3>
+        <div class="project-stack">C++ · Minimax · Alpha-Beta Pruning</div>
+        <p>An AI opponent for Mancala using minimax search with alpha-beta pruning, with game state organized through OOP design.</p>
+        <div class="proj-links">
+          <a href="https://github.com/MoazMahmud/Artificial_Intelligence_Sessional_CSE_318/tree/master/4.%20Mancala">Source</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head"><span class="section-num">05</span><span class="section-title">Education</span></div>
+    <div class="reveal">
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">B.Sc. in Computer Science and Engineering</div>
+          <div class="edu-org">Bangladesh University of Engineering and Technology, Dhaka</div>
+        </div>
+        <div class="edu-period">02/2016 — 02/2021</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-box reveal">
+      <h2>Let's work together.</h2>
+      <p>Open to select senior backend and full-stack engineering opportunities. The fastest way to reach me is email.</p>
+      <div class="contact-links">
+        <a href="mailto:moaz.mahmud.64@gmail.com" class="btn primary">moaz.mahmud.64@gmail.com</a>
+        <a href="https://www.linkedin.com/in/moaz-mahmud/" class="btn ghost">LinkedIn</a>
+        <a href="https://github.com/MoazMahmud" class="btn ghost">GitHub</a>
+      </div>
+    </div>
+
+    <footer>
+      <div>© <span id="year"></span> Moaz Mahmud</div>
+      <div class="foot-links">
+        <a href="https://mzmahmud.blogspot.com/">Blog</a>
+        <a href="youtube.html">YouTube Lectures</a>
+      </div>
+    </footer>
+  </section>
+
+</main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Generate a Hilbert curve path for the hero graphic
+  function hilbertPoints(order, size){
+    const pts = [];
+    const n = Math.pow(2, order);
+    function d2xy(d){
+      let rx, ry, x = 0, y = 0;
+      let t = d;
+      for(let s = 1; s < n; s *= 2){
+        rx = 1 & (t / 2);
+        ry = 1 & (t ^ rx);
+        if(ry === 0){
+          if(rx === 1){ x = s - 1 - x; y = s - 1 - y; }
+          [x, y] = [y, x];
+        }
+        x += s * rx;
+        y += s * ry;
+        t = Math.floor(t / 4);
+      }
+      return [x, y];
+    }
+    const total = n * n;
+    for(let d = 0; d < total; d++){
+      const [x, y] = d2xy(d);
+      const scale = size / n;
+      pts.push([x * scale + scale/2, y * scale + scale/2]);
+    }
+    return pts;
+  }
+
+  const pts = hilbertPoints(5, 512);
+  const dStr = 'M ' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L ');
+  const pathEl = document.getElementById('hilbert-path');
+  pathEl.setAttribute('d', dStr);
+  const len = pathEl.getTotalLength();
+  pathEl.style.strokeDasharray = len;
+  pathEl.style.strokeDashoffset = len;
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

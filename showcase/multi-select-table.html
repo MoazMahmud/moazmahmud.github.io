@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+
+<style>
+    .template-row {
+        display: none;
+    }
+</style>
+
+<body>
+
+    <div class="container text-center">
+        <h1>Multi Select Table</h1>
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-bordered table-striped" id='got-users-table'>
+                    <thead>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th></th>
+                    </thead>
+
+                    <tbody></tbody>
+
+                    <!-- Template Row-> to be cloned to add new row.
+                            CONVENTIONS: 
+                            * one tr with template-row class
+                            * td with class -> row-data-filedNameInJson
+                    -->
+                    <tr class="template-row">
+                        <td class="row-data-name"></td>
+                        <td class="row-data-age"></td>
+                        <td>
+                            <button class="btn btn-success" onclick="selectRow(this);">
+                                ->
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-success" id="get-data-btn">
+                    Get Data
+                </button>
+                <button type="button" class="btn btn-danger" id="clear-table-btn">
+                    Clear Table
+                </button>
+            </div>
+
+            <div class="col-6">
+                <table class="table table-bordered table-striped" id='selected-users-table'>
+                    <thead>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th></th>
+                    </thead>
+
+                    <tbody></tbody>
+
+                    <!-- Template Row-> to be cloned to add new row.
+                            CONVENTIONS: 
+                            * one tr with template-row class
+                            * td with class -> row-data-filedNameInJson
+                    -->
+                    <tr class="template-row">
+                        <td class="row-data-name"></td>
+                        <td class="row-data-age"></td>
+                        <td>
+                            <button class="btn btn-danger" onclick="unSelectRow(this);">
+                                &lt;-
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./my-random.js"></script>
+
+    <script>
+        // This simulates api call
+        const users = [
+            { name: 'Moaz Mahmud', age: 24 },
+            { name: 'Ayesha Anjum', age: 20 },
+            { name: 'Maliha Anjum', age: 10 },
+            { name: 'Tanvir Mahmud', age: 23 },
+        ];
+
+        function getData() {
+            // spread operator. used to copy array
+            let data = [...users];
+            data = data.map(user => {
+                // spread operator. used to copy object
+                const clonedUser = { ...user };
+                clonedUser.name += ` ${getRandomString(5)}`;
+                clonedUser.age = randomIntInRange(1, 60);
+                return clonedUser;
+            });
+            data.forEach(d => addDataInTable('got-users-table', d));
+        }
+
+        document.getElementById('get-data-btn').addEventListener('click', getData);
+        document.getElementById('clear-table-btn').addEventListener('click', () => {
+            document.getElementById('got-users-table').querySelector('tbody').innerHTML = '';
+        });
+
+        function addDataInTable(tableId, jsonData) {
+            const table = document.getElementById(tableId);
+
+            const templateRow = table.querySelector('.template-row').cloneNode(true);
+            templateRow.classList.remove('template-row');
+
+            // dataset attribute to store the data in tr
+            templateRow.dataset.rowData = JSON.stringify(jsonData);
+
+            for (let key in jsonData) {
+                const tdElement = templateRow.querySelector(`td.row-data-${key}`);
+                if (tdElement) tdElement.innerText = jsonData[key];
+            }
+
+            table.querySelector('tbody').append(templateRow);
+        }
+
+        function getRowDataAndMoveRow(rowButtonElement, destTableId) {
+            const containingRow = rowButtonElement.parentNode.parentNode;
+            const rowData = JSON.parse(containingRow.dataset.rowData);
+            if (destTableId) addDataInTable(destTableId, rowData);
+            containingRow.remove();
+            return rowData;
+        }
+
+        const addedUser = new Map();
+
+        function selectRow(rowButtonElement) {
+            const selectedUser = getRowDataAndMoveRow(rowButtonElement, 'selected-users-table');
+
+            addedUser.set(selectedUser.name, selectedUser);
+            console.log('collection afetr selection');
+            addedUser.forEach(user => console.log(user));
+        }
+
+        function unSelectRow(rowButtonElement) {
+            const unSelectedUser = getRowDataAndMoveRow(rowButtonElement, 'got-users-table');
+
+            addedUser.delete(unSelectedUser.name);
+            console.log('collection after un-selection');
+            addedUser.forEach(user => console.log(user));
+        }
+    </script>
+</body>
+
+</html>

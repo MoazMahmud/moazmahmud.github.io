@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn with Moaz</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+<style>
+  :root{
+    --font-bn:'Noto Sans Bengali', sans-serif;
+  }
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--font-body); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(94,234,212,0.06), transparent 60%);
+    background-attachment:fixed;
+  }
+  .bn{font-family:var(--font-bn);}
+
+  header{
+    position:sticky; top:0; z-index:100; background:rgba(10,14,19,0.75);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--border-soft);
+  }
+  .logo{font-family:var(--font-mono); font-size:14px; display:flex; align-items:center; gap:8px; color:var(--text-dim); transition:color 0.2s ease;}
+  .logo:hover{color:var(--text);}
+  .logo .arrow{color:var(--accent);}
+
+  #hero{padding:96px 0 64px;}
+  h1{
+    font-family:var(--font-display); font-weight:700; font-size:clamp(36px,6vw,60px);
+    line-height:1.05; letter-spacing:-0.02em; max-width:760px;
+  }
+  .hero-desc{max-width:600px; color:var(--text-dim); font-size:16px; margin-top:22px;}
+  .hero-desc strong{color:var(--text); font-weight:500;}
+  .stat-row{display:flex; gap:40px; margin-top:44px; flex-wrap:wrap;}
+  .stat-item .stat-val{font-family:var(--font-mono); font-size:28px; color:var(--text); font-weight:600;}
+  .stat-item .stat-val small{color:var(--accent); font-size:15px;}
+  .stat-item .stat-label{font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.4px; margin-top:4px;}
+
+  section{padding:64px 0;}
+  .section-head{display:flex; align-items:baseline; gap:18px; margin-bottom:44px;}
+  .section-title{font-family:var(--font-display); font-weight:600; font-size:26px;}
+
+  .course-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .course-card{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:8px;
+    overflow:hidden; transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .course-card:hover{transform:translateY(-4px); border-color:var(--accent-dim);}
+  .course-thumb{
+    aspect-ratio:16/9; width:100%; object-fit:cover; display:block;
+    border-bottom:1px solid var(--border); background:var(--bg-elevated);
+  }
+  .course-body{padding:20px 22px 22px;}
+  .course-title{font-family:var(--font-bn); font-size:18px; font-weight:600; margin-bottom:14px; line-height:1.4;}
+  .course-links{display:flex; gap:12px; font-family:var(--font-mono); font-size:12px;}
+  .course-links a{
+    padding:7px 12px; border:1px solid var(--border); border-radius:3px; color:var(--text-dim);
+    transition:all 0.2s ease;
+  }
+  .course-links a.primary{border-color:var(--accent-dim); color:var(--accent);}
+  .course-links a:hover{border-color:var(--accent); color:var(--accent);}
+
+  .subject-tag{
+    display:inline-block; font-family:var(--font-mono); font-size:10.5px; color:var(--warm);
+    text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;
+  }
+
+  .note-box{
+    margin-top:8px; padding:24px 28px; background:var(--bg-elevated); border:1px solid var(--border);
+    border-radius:6px; border-left:2px solid var(--accent);
+  }
+  .note-box p{font-family:var(--font-bn); font-size:14.5px; color:var(--text-dim); line-height:1.8;}
+
+  footer{
+    padding:48px 0 64px; border-top:1px solid var(--border-soft); margin-top:24px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  .foot-links{display:flex; gap:22px; font-size:13px; color:var(--text-dim);}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-copy{font-size:13px; color:var(--text-faint);}
+
+  @media (max-width:860px){
+    .course-grid{grid-template-columns:1fr;}
+    .stat-row{gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><span class="arrow">←</span> MOAZ MAHMUD</a>
+    <a href="https://www.youtube.com/MoazMahmud" class="nav-cta">Subscribe on YouTube</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section id="hero">
+    <div class="eyebrow">TEACHING — বাংলায় গণিত ও পদার্থবিজ্ঞান</div>
+    <h1>Learn with Moaz</h1>
+    <p class="hero-desc">I'm a Senior Software Engineer by trade, but teaching is where I started. As a native Bangla speaker, I care about giving students a <strong>deep, intuitive understanding</strong> of math and physics in their own language — not just formulas to memorize. This page collects my recorded lecture playlists, each with notes to follow along.</p>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-val">70<small>+ hrs</small></div>
+        <div class="stat-label">Recorded lectures</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">900<small>+ hrs</small></div>
+        <div class="stat-label">Total watch time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">9</div>
+        <div class="stat-label">Course playlists</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <div class="section-head"><span class="section-title">Course Playlists</span></div>
+    <div class="course-grid">
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m3-1.png" alt="সরলরেখা Batch 1 lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">সরলরেখা (Batch 1)</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK27hJaapydTWrXIYpLWdePv">Watch</a>
+            <a href="https://drive.google.com/drive/folders/13ngfTnhBBQ6mDKd9HhDEYi8RuA1GJTbk?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m3-2.png" alt="সরলরেখা Batch 2 lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">সরলরেখা (Batch 2)</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK3KxUL0cyIa0cK1QSDrlOf1">Watch</a>
+            <a href="https://drive.google.com/drive/folders/11Z7TUN7HJ9jjt49_IxBn-OPBmKn93C7q?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m6.png" alt="ত্রিকোণমিতি lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">ত্রিকোণমিতি</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK2LcS7Bf3DoJX-UsAVoq1wY">Watch</a>
+            <a href="https://drive.google.com/drive/folders/1z6-QsVhu1j0Y135gfkwiaqDDvZ_OdidF?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m8.png" alt="ফাংশন ও ফাংশনের লেখচিত্র lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">ফাংশন ও ফাংশনের লেখচিত্র</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK2tynv2daer1jLkHQd6ojlx">Watch</a>
+            <a href="https://drive.google.com/drive/folders/1OQNL20ss7FxAX43A9lgaDy2xt_Iu1fxC?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m9.png" alt="অন্তরীকরণ lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">অন্তরীকরণ</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK3XfDfrr3Gq_UcoPXexi9AV">Watch</a>
+            <a href="https://drive.google.com/drive/folders/1Y1GiVMNkN2VXbSN-FZvjjcaq-Bi1yQaF?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/m1.png" alt="বাস্তব সংখ্যা ও অসমতা lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Math</span>
+          <div class="course-title bn">বাস্তব সংখ্যা ও অসমতা</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK0LXRqVIHBqIJxu-fvJgZk5">Watch</a>
+            <a href="https://drive.google.com/drive/folders/1R6dfEZcdmvQXNWyjDx0wY6XWMJx2BrZu?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/p2.png" alt="ভেক্টর (পদার্থবিজ্ঞান) lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Physics</span>
+          <div class="course-title bn">ভেক্টর (পদার্থবিজ্ঞান)</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK1y818XtunW6aKvl2alwoMK">Watch</a>
+            <a href="https://drive.google.com/drive/folders/12lch6pZ48lumDGLJ0Y_DxU5WAQWasZMP?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <img class="course-thumb" src="images/p3.png" alt="গতিবিদ্যা (পদার্থবিজ্ঞান) lecture thumbnail" loading="lazy">
+        <div class="course-body">
+          <span class="subject-tag">Physics</span>
+          <div class="course-title bn">গতিবিদ্যা (পদার্থবিজ্ঞান)</div>
+          <div class="course-links">
+            <a class="primary" href="https://www.youtube.com/playlist?list=PLqCKFWjpdLK1GrRVZTyhaFamB9a8fZY3Y">Watch</a>
+            <a href="https://drive.google.com/drive/folders/1BHtFiKe5wb9OZYRTrXxCqvHCmMJf3Wlw?usp=sharing">Notes</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note-box">
+      <p class="bn">যেহেতু ক্লাসগুলো সরাসরি নেয়া হয়েছে, ছোটখাটো ভুল হয়ে যেতে পারে। এমন কিছু ভুল পেলে বা কোনো পরামর্শ থাকলে জানালে উন্নতি করার চেষ্টা করব।</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-copy">© <span id="year"></span> Moaz Mahmud</div>
+    <div class="foot-links">
+      <a href="https://www.youtube.com/MoazMahmud">YouTube</a>
+      <a href="https://www.facebook.com/moaz.mahmud.64">Facebook</a>
+      <a href="https://www.instagram.com/mz_mahmud/">Instagram</a>
+      <a href="mailto:moaz.mahmud.64@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/moaz-mahmud">LinkedIn</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
