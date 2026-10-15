@@ -1,0 +1,84 @@
+/* Colours from src/theme/tokens.ts. */
+:root {
+  --bg: #f5f1e8;
+  --surface: #fffcf5;
+  --line: #e3dace;
+  --ink: #1c1915;
+  --muted: #5c544a;
+  --teal-btn: #0f5b54;
+  --brass-ink: #85601f;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121110;
+    --surface: #1d1b18;
+    --line: #2f2b26;
+    --ink: #f2ece0;
+    --muted: #b3a999;
+    --teal-btn: #1f7a70;
+    --brass-ink: #d9b676;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Serif Bengali', 'Noto Sans Bengali', system-ui, sans-serif;
+  line-height: 1.6;
+}
+main {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  text-align: center;
+}
+img {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+}
+h1 {
+  margin: 12px 0 4px;
+  font-size: 26px;
+  line-height: 1.45;
+}
+p {
+  margin: 10px 0;
+}
+.en {
+  color: var(--muted);
+  font-size: 15px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  margin: 20px 0 8px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: var(--teal-btn);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.no-app-note {
+  display: none;
+  color: var(--brass-ink);
+}
+.no-app .no-app-note {
+  display: block;
+}
