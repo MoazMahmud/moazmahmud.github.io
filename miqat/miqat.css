@@ -5,6 +5,7 @@
   --line: #e3dace;
   --ink: #1c1915;
   --muted: #5c544a;
+  --teal: #0f5b54;
   --teal-btn: #0f5b54;
   --brass-ink: #85601f;
   color-scheme: light dark;
@@ -16,6 +17,7 @@
     --line: #2f2b26;
     --ink: #f2ece0;
     --muted: #b3a999;
+    --teal: #6cc3b5;
     --teal-btn: #1f7a70;
     --brass-ink: #d9b676;
   }
@@ -73,7 +75,46 @@ p {
   color: #fff;
   font-size: 17px;
   font-weight: 600;
+  text-align: center;
   text-decoration: none;
+}
+.button.secondary {
+  margin: 8px 0;
+  background: transparent;
+  border: 1.5px solid var(--teal);
+  color: var(--teal);
+}
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--teal);
+  font-weight: 600;
+}
+.small {
+  color: var(--muted);
+  font-size: 14px;
+}
+.get-app {
+  margin-top: 18px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+h2 {
+  margin: 24px 0 8px;
+  font-size: 19px;
+  line-height: 1.45;
+}
+.steps {
+  margin: 0;
+  padding: 0 0 0 1.4em;
+  text-align: left;
+}
+.steps li {
+  margin-bottom: 12px;
+}
+.steps p {
+  margin: 2px 0;
 }
 .no-app-note {
   display: none;
