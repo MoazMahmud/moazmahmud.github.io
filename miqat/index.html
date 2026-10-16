@@ -1,54 +1,559 @@
-<!doctype html>
-<html lang="bn">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>মীকাত · Miqat — উমরাহ ও হজের গাইড</title>
-    <meta name="description" content="A step-by-step guide to Umrah and Hajj, with duas, prayer times and the Qibla. Works offline." />
-    <meta property="og:title" content="মীকাত · Miqat — উমরাহ ও হজের গাইড" />
-    <meta property="og:description" content="A step-by-step guide to Umrah and Hajj. Download for Android." />
-    <meta property="og:image" content="https://moazmahmud.com/miqat/icon.png" />
-    <link rel="icon" href="icon.png" />
-    <link rel="stylesheet" href="miqat.css" />
-  </head>
-  <body>
-    <main>
-      <img src="icon.png" alt="" />
-      <h1>মীকাত</h1>
-      <p>
-        উমরাহ ও হজের ধাপে ধাপে গাইড: এখন কী করবেন, কী পড়বেন, অডিওসহ দোয়া, নামাজের সময় ও কিবলা। ইন্টারনেট ছাড়াই চলে।
-      </p>
-      <p class="en">
-        A step-by-step guide to Umrah and Hajj: what to do now, what to recite, duas with audio, prayer times and the
-        Qibla. Works without internet.
-      </p>
-      <a
-        class="button"
-        href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing"
-        rel="noopener"
-        >Android-এর জন্য ডাউনলোড করুন · Download for Android</a
-      >
-      <p class="small">আইফোনের জন্য এখনো নেই। · Not on iPhone yet.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miqat · মীকাত — Umrah and Hajj companion</title>
+<meta name="description" content="A step-by-step companion for Umrah and Hajj: what to do now, what to recite now. Bangla first, English second. Works without the internet.">
+<meta property="og:title" content="মীকাত · Miqat — উমরাহ ও হজের গাইড">
+<meta property="og:description" content="A step-by-step guide to Umrah and Hajj, with duas, prayer times and the Qibla. Download for Android.">
+<meta property="og:image" content="https://moazmahmud.com/miqat/icon.png">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/shared.css">
+<style>
+  :root{
+    --font-bn:'Noto Sans Bengali', sans-serif;
+    --font-ar:'Noto Naskh Arabic', serif;
+  }
+  body{
+    background:var(--bg); color:var(--text); font-family:var(--font-body); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(94,234,212,0.06), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 40%, rgba(242,166,90,0.035), transparent 60%);
+    background-attachment:fixed;
+  }
+  .bn{font-family:var(--font-bn); line-height:1.75;}
+  .ar{font-family:var(--font-ar); direction:rtl; unicode-bidi:isolate;}
 
-      <h2>কীভাবে ইনস্টল করবেন · How to install</h2>
+  header{
+    position:sticky; top:0; z-index:100; background:rgba(10,14,19,0.75);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--border-soft);
+  }
+  .logo{font-family:var(--font-mono); font-size:14px; display:flex; align-items:center; gap:8px; color:var(--text-dim); transition:color 0.2s ease;}
+  .logo:hover{color:var(--text);}
+  .logo .arrow{color:var(--accent);}
+
+  /* HERO */
+  #hero{position:relative; padding:96px 0 64px; overflow:hidden;}
+  .star{
+    position:absolute; top:40px; right:-40px; width:420px; height:420px; opacity:0.12; z-index:0;
+    stroke:var(--accent); fill:none; stroke-width:1.2;
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .app-id{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .app-icon{width:88px; height:88px; border-radius:22px; border:1px solid var(--border); display:block;}
+  h1{
+    font-family:var(--font-display); font-weight:700; font-size:clamp(40px,6vw,64px);
+    line-height:1.05; letter-spacing:-0.02em;
+  }
+  h1 .bn{font-weight:600; color:var(--text-dim); font-size:0.62em; letter-spacing:0; margin-left:6px;}
+  .hero-desc{max-width:600px; color:var(--text-dim); font-size:16.5px; margin-top:24px;}
+  .hero-desc strong{color:var(--text); font-weight:500;}
+  .hero-bn{max-width:600px; color:var(--text-faint); font-size:15px; margin-top:10px;}
+  .hero-links{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; padding:12px 22px; min-height:44px;
+    border-radius:3px; border:1px solid var(--border); transition:all 0.2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn.primary{background:var(--accent); color:#06120F; border-color:var(--accent); font-weight:500;}
+  .btn.primary:hover{background:#7FF2DE; box-shadow:0 0 24px rgba(94,234,212,0.25);}
+  .btn.ghost{color:var(--text-dim);}
+  .btn.ghost:hover{border-color:var(--text-dim); color:var(--text);}
+  .hero-note{font-family:var(--font-mono); font-size:12px; color:var(--text-faint); margin-top:14px;}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); margin-top:56px;
+    border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);
+  }
+  .stat-item{padding:20px 24px; border-right:1px solid var(--border-soft);}
+  .stat-item:last-child{border-right:none;}
+  .stat-val{font-family:var(--font-mono); font-size:26px; color:var(--text); font-weight:600;}
+  .stat-val small{color:var(--accent); font-size:15px;}
+  .stat-label{font-size:12px; color:var(--text-faint); margin-top:4px; text-transform:uppercase; letter-spacing:0.4px;}
+
+  /* SECTIONS */
+  section{padding:72px 0;}
+  .section-head{display:flex; align-items:baseline; gap:18px; margin-bottom:40px;}
+  .section-num{font-family:var(--font-mono); color:var(--text-faint); font-size:13px;}
+  .section-title{font-family:var(--font-display); font-weight:600; font-size:28px;}
+  .prose p{color:var(--text-dim); font-size:15.5px; margin-bottom:18px; max-width:640px;}
+  .prose p strong{color:var(--text); font-weight:500;}
+
+  /* WHY + DEMO */
+  .why-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:64px; align-items:start;}
+  .questions{list-style:none; padding:0; margin:8px 0 22px;}
+  .questions li{
+    padding:16px 20px; margin-bottom:12px; background:var(--bg-alt);
+    border:1px solid var(--border); border-left:2px solid var(--accent); border-radius:4px;
+    color:var(--text-dim); font-size:15px;
+  }
+  .questions li strong{display:block; color:var(--text); font-family:var(--font-display); font-weight:600; font-size:17px; margin-bottom:2px;}
+  .demo{justify-self:center; width:100%; max-width:300px;}
+  .demo-label{
+    font-family:var(--font-mono); font-size:11px; color:var(--warm); text-transform:uppercase;
+    letter-spacing:0.6px; margin-bottom:12px;
+  }
+  .phone{
+    aspect-ratio:9/20; width:100%; background:var(--bg-elevated);
+    border:1px solid var(--border); border-radius:22px; overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  }
+  .phone iframe{width:100%; height:100%; border:0; display:block;}
+  .demo-links{display:flex; gap:18px; margin-top:14px; font-family:var(--font-mono); font-size:12px; flex-wrap:wrap;}
+  .demo-links a{color:var(--accent); display:inline-flex; align-items:center; min-height:32px;}
+  .demo-links a:hover{text-decoration:underline;}
+
+  /* NAME */
+  .name-grid{display:grid; grid-template-columns:auto 1fr; gap:56px; align-items:center;}
+  .name-mark{
+    text-align:center; padding:28px 36px; background:var(--bg-alt);
+    border:1px solid var(--border); border-radius:6px;
+  }
+  .name-mark .ar{font-size:54px; line-height:1.5; color:var(--text);}
+  .name-mark .bn{font-size:22px; color:var(--text-dim); margin-top:2px;}
+  .name-mark .tr{font-family:var(--font-mono); font-size:12px; color:var(--accent); margin-top:8px; letter-spacing:0.5px;}
+  blockquote{
+    margin:6px 0 18px; padding:16px 22px; max-width:640px;
+    border-left:2px solid var(--warm); background:var(--bg-alt); border-radius:0 4px 4px 0;
+    color:var(--text); font-size:15.5px;
+  }
+  blockquote cite{display:block; font-style:normal; font-family:var(--font-mono); font-size:12px; color:var(--text-faint); margin-top:6px;}
+
+  /* FEATURES */
+  .feature{
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:48px; align-items:start;
+    padding:44px 0; border-top:1px solid var(--border-soft);
+  }
+  .section-head + .feature{border-top:none; padding-top:0;}
+  .feature-tag{
+    display:inline-block; font-family:var(--font-mono); font-size:11px; color:var(--warm);
+    text-transform:uppercase; letter-spacing:0.6px; margin-bottom:10px;
+  }
+  .feature h3{font-family:var(--font-display); font-size:22px; font-weight:600; margin-bottom:16px;}
+  .feature ul{list-style:none; padding:0; max-width:520px;}
+  .feature li{
+    position:relative; padding-left:18px; color:var(--text-dim); font-size:14.5px; margin-bottom:10px;
+  }
+  .feature li::before{content:'—'; position:absolute; left:0; color:var(--text-faint);}
+  .feature li strong{color:var(--text); font-weight:500;}
+  .feature li .ref{color:var(--accent); font-family:var(--font-mono); font-size:12.5px;}
+  .shots{display:flex; gap:16px;}
+  .shot{margin:0; width:190px; flex:none;}
+  .shot img{
+    width:100%; height:auto; display:block; border-radius:16px;
+    border:1px solid var(--border); box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  }
+  .shot figcaption{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-top:10px; text-align:center;}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
+  .chip{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
+    padding:6px 11px; border:1px solid var(--border); border-radius:3px;
+  }
+
+  /* SOURCES */
+  .source-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .source-card{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px; padding:24px 26px;
+  }
+  .source-card h3{font-family:var(--font-display); font-size:17px; font-weight:600; margin-bottom:6px;}
+  .source-meta{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-bottom:14px;}
+  .source-card p{font-size:13.5px; color:var(--text-dim); margin-bottom:12px;}
+  .source-card p:last-child{margin-bottom:0;}
+  .source-card a{color:var(--accent);}
+  .source-card a:hover{text-decoration:underline;}
+  .source-card ul{list-style:none; padding:0;}
+  .source-card li{font-size:13.5px; color:var(--text-dim); margin-bottom:8px; padding-left:16px; position:relative;}
+  .source-card li::before{content:'↗'; position:absolute; left:0; font-size:11px; color:var(--text-faint); top:2px;}
+
+  /* NOTES */
+  .note-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .note-box{
+    padding:24px 28px; background:var(--bg-elevated); border:1px solid var(--border);
+    border-radius:6px; border-left:2px solid var(--accent);
+  }
+  .note-box.caution{border-left-color:var(--warm);}
+  .note-box h3{font-family:var(--font-display); font-size:18px; font-weight:600; margin-bottom:12px;}
+  .note-box p, .note-box li{font-size:14.5px; color:var(--text-dim);}
+  .note-box p{margin-bottom:10px;}
+  .note-box ul{padding-left:18px;}
+  .note-box li{margin-bottom:8px;}
+  .note-box strong{color:var(--text); font-weight:500;}
+
+  /* INSTALL */
+  .install-grid{display:grid; grid-template-columns:1fr 1.2fr; gap:56px; align-items:start;}
+  .install-cta p{color:var(--text-dim); font-size:15px; margin-bottom:20px;}
+  .steps{list-style:none; padding:0; counter-reset:step;}
+  .steps li{
+    counter-increment:step; position:relative; padding:0 0 22px 52px; margin-bottom:4px;
+  }
+  .steps li::before{
+    content:counter(step, decimal-leading-zero); position:absolute; left:0; top:2px;
+    font-family:var(--font-mono); font-size:13px; color:var(--accent);
+    width:34px; height:34px; border:1px solid var(--accent-dim); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .bn{color:var(--text); font-size:15px;}
+  .steps .en{color:var(--text-dim); font-size:14px; margin-top:2px;}
+  .steps b{font-weight:600;}
+
+  footer{
+    padding:48px 0 64px; border-top:1px solid var(--border-soft); margin-top:24px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  .foot-links{display:flex; gap:22px; font-size:13px; color:var(--text-dim); flex-wrap:wrap;}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-copy{font-size:13px; color:var(--text-faint);}
+
+  @media (max-width:960px){
+    .feature{grid-template-columns:minmax(0,1fr); gap:28px;}
+    .shots{overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; margin-right:-32px; padding-right:32px;}
+    .shot{scroll-snap-align:start; width:200px;}
+    .source-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:860px){
+    .why-grid, .name-grid, .install-grid, .note-grid{grid-template-columns:minmax(0,1fr); gap:36px;}
+    .name-mark{justify-self:start;}
+    .stat-row{grid-template-columns:repeat(2,1fr);}
+    .stat-item:nth-child(2){border-right:none;}
+    .stat-item:nth-child(-n+2){border-bottom:1px solid var(--border-soft);}
+    .star{width:280px; height:280px; opacity:0.08;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 16px;}
+    .shots{margin-right:-16px; padding-right:16px;}
+    .source-grid{grid-template-columns:minmax(0,1fr);}
+    .nav-cta{display:none;}
+    #hero{padding-top:56px;}
+    section{padding:56px 0;}
+    .section-title{font-size:24px;}
+    .stat-item{padding:16px 14px;}
+    .stat-val{font-size:22px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo"><span class="arrow">←</span> MOAZ MAHMUD</a>
+    <a href="#install" class="nav-cta">Download for Android</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section id="hero">
+    <svg class="star" viewBox="0 0 200 200" aria-hidden="true">
+      <rect x="40" y="40" width="120" height="120"/>
+      <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+      <circle cx="100" cy="100" r="36"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="eyebrow">ANDROID APP — UMRAH &amp; HAJJ COMPANION</div>
+      <div class="app-id">
+        <img class="app-icon" src="icon.png" alt="Miqat app icon" width="88" height="88">
+        <h1>Miqat <span class="bn" lang="bn">মীকাত</span></h1>
+      </div>
+      <p class="hero-desc">A step-by-step companion for Umrah and Hajj: <strong>what to do now, and what to recite now.</strong> Bangla first, English second. Works without the internet.</p>
+      <p class="hero-bn bn" lang="bn">উমরাহ ও হজের ধাপে ধাপে গাইড: এখন কী করবেন, কী পড়বেন, অডিওসহ দোয়া, নামাজের সময় ও কিবলা।</p>
+      <div class="hero-links">
+        <a href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing" class="btn primary" rel="noopener">Download for Android →</a>
+        <a href="#demo" class="btn ghost">Watch the demo</a>
+        <a href="#install" class="btn ghost">How to install</a>
+      </div>
+      <div class="hero-note">Not on iPhone yet.</div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-val">8</div>
+          <div class="stat-label">Umrah steps</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">13</div>
+          <div class="stat-label">Hajj steps, by day</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">421</div>
+          <div class="stat-label">Duas from Hisn al-Muslim</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val">313</div>
+          <div class="stat-label">Duas with audio</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="section-head"><span class="section-num">01</span><span class="section-title">Why I built this</span></div>
+    <div class="why-grid">
+      <div class="prose">
+        <p>I was looking for an app that would guide me through Umrah and Hajj step by step, like a companion walking beside me. I didn't find one that did it the way I wanted, so I built Miqat.</p>
+        <p>The app is built around two questions a pilgrim keeps asking:</p>
+        <ul class="questions">
+          <li><strong>What do I do now?</strong>One card per step, in order, with a progress bar. Tap Done and the next step comes up.</li>
+          <li><strong>What do I say now?</strong>The words for that moment, in Arabic, with transliteration, meaning, source and audio.</li>
+        </ul>
+        <p>It also has to work where pilgrims actually are. The mobile network in Mina and Arafah is unreliable, so <strong>everything runs on the phone</strong>: the guides, the dua library, prayer times and the Qibla.</p>
+      </div>
+      <div class="demo" id="demo">
+        <div class="demo-label">Demo · Miqat 0.1.0</div>
+        <div class="phone">
+          <iframe src="https://drive.google.com/file/d/1T8bIO4LNQbphW4JwlaHyhblDZRsNtyQw/preview" title="Miqat demo video" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="demo-links">
+          <a href="https://drive.google.com/file/d/1T8bIO4LNQbphW4JwlaHyhblDZRsNtyQw/view" rel="noopener">Open the video ↗</a>
+          <a href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing" rel="noopener">Drive folder ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="name">
+    <div class="section-head"><span class="section-num">02</span><span class="section-title">Why the name</span></div>
+    <div class="name-grid">
+      <div class="name-mark">
+        <div class="ar" lang="ar">مِيقَات</div>
+        <div class="bn" lang="bn">মীকাত</div>
+        <div class="tr">MĪQĀT</div>
+      </div>
+      <div class="prose">
+        <p><strong>Mīqāt</strong> is the boundary where a pilgrim enters ihram and makes the intention. Umrah and Hajj begin when you cross it. For most pilgrims flying from Bangladesh, that moment comes on the plane, before landing in Jeddah. That's the first card in the app, and the point where a guide in your pocket starts to matter.</p>
+        <p>The word comes from <em>waqt</em>, time: a mīqāt is an appointed time or place. The Qur'an uses its plural for the new moons:</p>
+        <blockquote>"They are times appointed (mawāqīt) for people and for Hajj."<cite>Qur'an 2:189</cite></blockquote>
+        <p>So the name also fits the rest of the app: prayer times, the Hijri date and the expected days of Hajj.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-head"><span class="section-num">03</span><span class="section-title">Features</span></div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Guides</span>
+        <h3>One card per step, from ihram to the farewell Tawaf</h3>
+        <ul>
+          <li><strong>Umrah in 8 steps and Hajj in 13</strong>, one card per step. Swipe between cards or tap the numbered bubbles.</li>
+          <li><strong>Hajj types:</strong> Tamattu‘ (the default), Qiran and Ifrad. The type changes the 8th-day ihram, whether a sacrifice is required, and whether Sa‘i follows Tawaf al-Ifadah.</li>
+          <li><strong>Hajj dates</strong> come from the Umm al-Qura calendar and are marked as expected, since the final dates depend on the moon sighting.</li>
+          <li><strong>Practice mode:</strong> rehearse at home with separate progress, so the real pilgrimage starts fresh.</li>
+          <li><strong>Ihram restrictions:</strong> what's forbidden for everyone, for men, for women and inside the Haram, and what to do if one happens.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/home.png" alt="Home screen with the Umrah card, the current prayer and the Qibla" width="540" height="1200" loading="lazy"><figcaption>Home</figcaption></figure>
+        <figure class="shot"><img src="screenshots/umrah-guide.png" alt="Umrah guide, step 1: ihram and intention" width="540" height="1200" loading="lazy"><figcaption>Umrah guide</figcaption></figure>
+        <figure class="shot"><img src="screenshots/hajj-guide.png" alt="Hajj guide, 8 Dhul Hijjah: Hajj ihram" width="540" height="1200" loading="lazy"><figcaption>Hajj guide</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Tawaf and Sa‘i</span>
+        <h3>Round counters that show what to say where</h3>
+        <ul>
+          <li>Count your rounds with a large button, and undo a mistaken tap.</li>
+          <li>A diagram shows the Black Stone, the Yemeni Corner and the Hatim, or Safa, Marwah and the green lights.</li>
+          <li>Only words with an authentic source: "Allāhu akbar" at the Black Stone <span class="ref">Bukhari 1613</span>, <em>Rabbanā ātinā…</em> between the Yemeni Corner and the Black Stone <span class="ref">2:201</span>, and the dhikr on Safa and Marwah <span class="ref">Muslim 1218</span>.</li>
+          <li>It says plainly that there is no fixed dua for each round.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/tawaf.png" alt="Tawaf counter on round 3 of 7 with the Kaaba diagram" width="540" height="1200" loading="lazy"><figcaption>Tawaf counter</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Duas</span>
+        <h3>The whole of Hisn al-Muslim, with audio</h3>
+        <ul>
+          <li><strong>421 duas</strong>, each split into lines, with Arabic, transliteration and meaning in Bangla or English, plus the hadith or ayah it comes from.</li>
+          <li><strong>Audio for 313 duas.</strong> Each line highlights while it plays. The guide's duas download on first launch and stay on the phone.</li>
+          <li><strong>Memorize mode</strong> blurs the text while the audio is paused. Tap a line to reveal it and play from there.</li>
+          <li><strong>Search</strong> by words or by Hisn al-Muslim number.</li>
+          <li><strong>My list:</strong> add duas from the library, drag to reorder, swipe to remove, play them all in order, and share the list or a single dua as a link.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/dua.png" alt="The Talbiyah with Arabic, transliteration, meaning and source" width="540" height="1200" loading="lazy"><figcaption>Dua</figcaption></figure>
+        <figure class="shot"><img src="screenshots/duas.png" alt="Dua library filtered to Hajj and Umrah" width="540" height="1200" loading="lazy"><figcaption>Library</figcaption></figure>
+        <figure class="shot"><img src="screenshots/my-list.png" alt="My list with three duas and a Play all button" width="540" height="1200" loading="lazy"><figcaption>My list</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Prayer and Qibla</span>
+        <h3>Calculated on the phone, wherever you are</h3>
+        <ul>
+          <li><strong>Prayer times</strong> use Umm al-Qura in Saudi Arabia, and Karachi with Hanafi Asr in Bangladesh. You can change the method and switch Asr between Standard and Hanafi.</li>
+          <li><strong>The day is shown as segments.</strong> Forbidden times (sunrise, zawal, sunset) appear as red rows, and Duha is always marked nafl.</li>
+          <li><strong>Reminders</strong> come at each prayer time and work offline.</li>
+          <li><strong>Qibla compass</strong> with the bearing and the distance to the Kaaba, and a tip to calibrate when the compass is unsure. Within 500 km of Makkah it asks for GPS, because a city's centre point gives the wrong direction that close to the Kaaba.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/prayer.png" alt="Prayer times in Makkah with Asr running and forbidden times in red" width="540" height="1200" loading="lazy"><figcaption>Prayer times</figcaption></figure>
+        <figure class="shot"><img src="screenshots/qibla.png" alt="Qibla compass pointing at 289 degrees, 5.8 km to the Kaaba" width="540" height="1200" loading="lazy"><figcaption>Qibla</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Made for reading</span>
+        <h3>Comfortable in Bangla, English and Arabic</h3>
+        <div class="chip-row">
+          <span class="chip">বাংলা + English</span>
+          <span class="chip">Bangla digits and dates</span>
+          <span class="chip">Light and dark themes</span>
+          <span class="chip">Four text sizes</span>
+          <span class="chip">Separate Arabic size</span>
+          <span class="chip">Scheherazade New or Noto Naskh Arabic</span>
+          <span class="chip">Works offline</span>
+          <span class="chip">No account</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="section-head"><span class="section-num">04</span><span class="section-title">Sources and credits</span></div>
+    <div class="source-grid">
+
+      <div class="source-card">
+        <h3>Steps of Umrah and Hajj</h3>
+        <div class="source-meta">Presidency of Religious Affairs, Two Holy Mosques</div>
+        <ul>
+          <li><a href="https://risala.prh.gov.sa/storage/contents/940/en_sifat_alomrah_harmain.pdf" rel="noopener"><em>How to do ‘Umrah</em></a></li>
+          <li><a href="https://risala.prh.gov.sa/storage/contents/114/en-attahqiq_walidoh-3.1.pdf" rel="noopener">Ibn Baz, <em>at-Tahqiq wal-Idah</em></a>: Hajj, Umrah and visiting Madinah</li>
+        </ul>
+        <p>Where the schools of law differ, the app doesn't take a side. It says "follow your group's guidance".</p>
+      </div>
+
+      <div class="source-card">
+        <h3>Duas</h3>
+        <div class="source-meta">Hisn al-Muslim · Sa‘id ibn ‘Ali ibn Wahf al-Qahtani</div>
+        <p>As published by <a href="https://gtaf.org" rel="noopener">Greentech Apps Foundation (GTAF)</a> at <a href="https://dua.gtaf.org" rel="noopener">dua.gtaf.org</a>: the Arabic, the Bangla and English transliterations and meanings, the references and the audio recordings.</p>
+        <p>Gaps in one language were filled with our own translation, and a few errors were corrected. The ihram intentions come from Sahih Muslim 1251 and the two booklets.</p>
+      </div>
+
+      <div class="source-card">
+        <h3>Prayer times and Qibla</h3>
+        <div class="source-meta">MIT license</div>
+        <p><a href="https://github.com/batoulapps/adhan-js" rel="noopener">adhan-js</a> by Batoul Apps calculates the prayer times and the Qibla bearing on the phone.</p>
+      </div>
+
+      <div class="source-card">
+        <h3>Hijri date</h3>
+        <div class="source-meta">MIT license · free public API</div>
+        <p><a href="https://www.npmjs.com/package/@tabby_ai/hijri-converter" rel="noopener">@tabby_ai/hijri-converter</a>, a TypeScript port of Mohammed Alshehri's <a href="https://github.com/mhalshehri/hijri-converter" rel="noopener">hijri-converter</a>, gives the Umm al-Qura date.</p>
+        <p>When online, the <a href="https://aladhan.com/islamic-calendar-api" rel="noopener">Aladhan API</a> checks the date Saudi Arabia announced.</p>
+      </div>
+
+      <div class="source-card">
+        <h3>Fonts</h3>
+        <div class="source-meta">SIL Open Font License · bundled for offline use</div>
+        <ul>
+          <li><a href="https://fonts.google.com/specimen/Tiro+Bangla" rel="noopener">Tiro Bangla</a> for headings</li>
+          <li><a href="https://fonts.google.com/specimen/Noto+Serif+Bengali" rel="noopener">Noto Serif Bengali</a> for Bangla and English text</li>
+          <li><a href="https://fonts.google.com/specimen/Scheherazade+New" rel="noopener">Scheherazade New</a> by SIL International, and <a href="https://fonts.google.com/specimen/Noto+Naskh+Arabic" rel="noopener">Noto Naskh Arabic</a>, for Arabic</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3>Built with</h3>
+        <div class="source-meta">Expo · React Native · TypeScript</div>
+        <div class="chip-row">
+          <span class="chip">Expo Router</span>
+          <span class="chip">expo-audio</span>
+          <span class="chip">expo-location</span>
+          <span class="chip">expo-notifications</span>
+          <span class="chip">expo-sqlite</span>
+          <span class="chip">Reanimated</span>
+          <span class="chip">i18next</span>
+          <span class="chip">Zustand</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="section-head"><span class="section-num">05</span><span class="section-title">Good to know</span></div>
+    <div class="note-grid">
+      <div class="note-box caution">
+        <h3>Before you rely on it</h3>
+        <ul>
+          <li><strong>The religious content hasn't been reviewed by a scholar yet.</strong> That review is planned before a public release. Until then, treat the app as a study aid, and follow your group's scholar during the pilgrimage.</li>
+          <li><strong>Prayer times are calculated,</strong> not taken from the mosque's timetable. The forbidden-time lengths are approximate.</li>
+          <li><strong>Hajj dates are predictions.</strong> They become final when the moon is sighted.</li>
+        </ul>
+      </div>
+      <div class="note-box">
+        <h3>Privacy</h3>
+        <p>There is no backend and no account. Your location, progress and dua list stay on your phone. The app connects to the internet only to:</p>
+        <ul>
+          <li>download dua audio from GTAF</li>
+          <li>check the Saudi Hijri date with Aladhan</li>
+          <li>name a GPS location, using the phone's own geocoder</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="section-head"><span class="section-num">06</span><span class="section-title">Install on Android</span></div>
+    <div class="install-grid">
+      <div class="install-cta">
+        <p>The app isn't on the Play Store yet. Download the APK from Google Drive and install it yourself.</p>
+        <p class="bn" lang="bn">অ্যাপটি এখনো Play Store-এ নেই। গুগল ড্রাইভ থেকে APK ফাইল ডাউনলোড করে নিজে ইনস্টল করুন।</p>
+        <div class="hero-links">
+          <a href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing" class="btn primary" rel="noopener">Download for Android →</a>
+        </div>
+        <div class="hero-note"><span class="bn" lang="bn">আইফোনের জন্য এখনো নেই।</span> · Not on iPhone yet.</div>
+      </div>
       <ol class="steps">
         <li>
-          <p>ড্রাইভ ফোল্ডার থেকে সবচেয়ে নতুন <b>miqat-….apk</b> ফাইলটি ডাউনলোড করুন।</p>
-          <p class="en">Download the newest <b>miqat-….apk</b> from the Drive folder.</p>
+          <div class="bn" lang="bn">ড্রাইভ ফোল্ডার থেকে সবচেয়ে নতুন <b>miqat-….apk</b> ফাইলটি ডাউনলোড করুন।</div>
+          <div class="en">Download the newest <b>miqat-….apk</b> from the Drive folder.</div>
         </li>
         <li>
-          <p>ডাউনলোড হওয়া ফাইলটি খুলুন। ফোন অনুমতি চাইলে এই উৎস (Chrome বা Files) থেকে অ্যাপ ইনস্টল করার অনুমতি দিন।</p>
-          <p class="en">Open the downloaded file. If your phone asks, allow installing apps from this source (Chrome or Files).</p>
+          <div class="bn" lang="bn">ডাউনলোড হওয়া ফাইলটি খুলুন। ফোন অনুমতি চাইলে এই উৎস (Chrome বা Files) থেকে অ্যাপ ইনস্টল করার অনুমতি দিন।</div>
+          <div class="en">Open the downloaded file. If your phone asks, allow installing apps from this source (Chrome or Files).</div>
         </li>
         <li>
-          <p>অ্যাপটি Play Store থেকে নয় বলে Android সতর্ক করতে পারে। তবুও ইনস্টল করা বেছে নিন।</p>
-          <p class="en">Android may warn you because the app isn’t from the Play Store. Choose to install anyway.</p>
+          <div class="bn" lang="bn">অ্যাপটি Play Store থেকে নয় বলে Android সতর্ক করতে পারে। তবুও ইনস্টল করা বেছে নিন।</div>
+          <div class="en">Android may warn you because the app isn’t from the Play Store. Choose to install anyway.</div>
         </li>
         <li>
-          <p>নতুন সংস্করণ এলে একইভাবে ইনস্টল করুন। আপনার দোয়ার তালিকা ও অগ্রগতি থেকে যাবে।</p>
-          <p class="en">To update, install a newer file the same way. Your dua list and progress stay.</p>
+          <div class="bn" lang="bn">নতুন সংস্করণ এলে একইভাবে ইনস্টল করুন। আপনার দোয়ার তালিকা ও অগ্রগতি থেকে যাবে।</div>
+          <div class="en">To update, install a newer file the same way. Your dua list and progress stay.</div>
         </li>
       </ol>
-    </main>
-  </body>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-copy">© <span id="year"></span> Moaz Mahmud</div>
+    <div class="foot-links">
+      <a href="/">Portfolio</a>
+      <a href="mailto:moaz.mahmud.64@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/moaz-mahmud">LinkedIn</a>
+      <a href="https://github.com/MoazMahmud">GitHub</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
 </html>

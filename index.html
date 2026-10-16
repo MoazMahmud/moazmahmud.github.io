@@ -105,6 +105,8 @@
     display:inline-flex; align-items:center; gap:6px; transition:color 0.2s ease;
   }
   .hero-subLinks a:hover{color:var(--accent);}
+  .hero-subLinks a.hl{color:var(--accent);}
+  .hero-subLinks a.hl:hover{color:#7FF2DE;}
   .hero-subLinks a::before{content:'↗'; font-size:11px;}
   .btn{
     font-family:var(--font-mono); font-size:13px; padding:12px 22px;
@@ -215,6 +217,24 @@
   .proj-links a{color:var(--accent);}
   .proj-links a:hover{text-decoration:underline;}
 
+  .proj-card.featured{
+    grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+    gap:40px; align-items:center; padding:32px;
+  }
+  .featured-head{display:flex; align-items:center; gap:16px; margin-bottom:10px;}
+  .featured-icon{width:56px; height:56px; border-radius:14px; border:1px solid var(--border); flex:none;}
+  .featured-tag{
+    font-family:var(--font-mono); font-size:11px; color:var(--warm); text-transform:uppercase;
+    letter-spacing:0.6px; margin-bottom:4px;
+  }
+  .proj-card.featured h3{font-size:22px; margin-bottom:0;}
+  .proj-card.featured p{font-size:14.5px; min-height:0;}
+  .featured-shots{display:flex; gap:14px; justify-content:flex-end;}
+  .featured-shots img{
+    flex:1 1 0; min-width:0; max-width:150px; height:auto; display:block;
+    border-radius:14px; border:1px solid var(--border); box-shadow:0 14px 36px rgba(0,0,0,0.4);
+  }
+
   /* EDUCATION */
   .edu-card{
     display:flex; justify-content:space-between; align-items:baseline;
@@ -254,7 +274,9 @@
     .readout{grid-template-columns:repeat(2,1fr);}
     .readout-item:nth-child(2){border-right:none;}
     .skills-grid{grid-template-columns:1fr;}
-    .proj-grid{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:minmax(0,1fr);}
+    .proj-card.featured{grid-template-columns:minmax(0,1fr); gap:28px; padding:26px;}
+    .featured-shots{justify-content:flex-start;}
     #hilbert-svg{opacity:0.08; width:420px; height:420px;}
     .nav-links{display:none;}
     .contact-box{padding:44px 24px;}
@@ -293,6 +315,7 @@
         <a href="#experience" class="btn ghost">View experience</a>
       </div>
       <div class="hero-subLinks">
+        <a href="miqat/" class="hl">Miqat — Umrah &amp; Hajj app</a>
         <a href="youtube.html">YouTube Lectures</a>
         <a href="https://mzmahmud.blogspot.com/">Blog</a>
       </div>
@@ -471,6 +494,30 @@
   <section id="projects">
     <div class="section-head"><span class="section-num">04</span><span class="section-title">Selected Projects</span></div>
     <div class="proj-grid reveal">
+
+      <div class="proj-card featured">
+        <div>
+          <div class="featured-head">
+            <img class="featured-icon" src="miqat/icon.png" alt="" width="56" height="56">
+            <div>
+              <div class="featured-tag">Android app · new</div>
+              <h3>Miqat · <span lang="bn">মীকাত</span></h3>
+            </div>
+          </div>
+          <div class="project-stack">Expo · React Native · TypeScript · Expo Router · adhan-js</div>
+          <p>A step-by-step companion for Umrah and Hajj: one card per step, the dua for each moment with audio, Tawaf and Sa‘i counters, prayer times and a Qibla compass. Bangla first, English second, and it runs fully on the phone, because the network in Mina and Arafah is unreliable.</p>
+          <div class="proj-links">
+            <a href="miqat/">Project page</a>
+            <a href="https://drive.google.com/file/d/1T8bIO4LNQbphW4JwlaHyhblDZRsNtyQw/view">Demo video</a>
+            <a href="miqat/#install">Download</a>
+          </div>
+        </div>
+        <div class="featured-shots">
+          <img src="miqat/screenshots/umrah-guide.png" alt="Miqat Umrah guide card" width="540" height="1200" loading="lazy">
+          <img src="miqat/screenshots/tawaf.png" alt="Miqat Tawaf round counter" width="540" height="1200" loading="lazy">
+          <img src="miqat/screenshots/qibla.png" alt="Miqat Qibla compass" width="540" height="1200" loading="lazy">
+        </div>
+      </div>
 
       <div class="proj-card">
         <h3>Hilbert Curve Space-Filler</h3>
