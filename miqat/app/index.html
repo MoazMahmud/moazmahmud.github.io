@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="utf-8" />
+    <!-- viewport-fit=cover lets the app draw under the notch and home bar; the safe-area insets keep text clear of them. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Miqat</title>
+    <meta name="description" content="Umrah and Hajj step by step, with duas, prayer times and the Qibla." />
+    <meta name="theme-color" content="#F5F1E8" />
+    <!-- Opened from the Home Screen, an iPhone shows it full screen, under its own name. -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Miqat" />
+    <!-- Times and dates aren't phone numbers. -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* Full height, in the app's background colour (bg in src/theme/tokens.ts) until it loads. */
+      html,
+      body {
+        height: 100%;
+        background-color: #f5f1e8;
+      }
+      html.dark,
+      html.dark body {
+        background-color: #121110;
+      }
+      /* The screens scroll, not the page; no pull-to-refresh. */
+      body {
+        overflow: hidden;
+        overscroll-behavior: none;
+        -webkit-text-size-adjust: 100%;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+    <script>
+      // The saved theme from the first frame, before the app loads, so a
+      // dark-theme user doesn't see a light flash. Reads what
+      // src/store/settings.ts saves.
+      (function () {
+        try {
+          var pref = JSON.parse(localStorage.getItem('settings')).state.themePreference;
+          var dark =
+            pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) {
+            document.documentElement.className = 'dark';
+            document.querySelector('meta[name="theme-color"]').content = '#121110';
+          }
+        } catch (e) {}
+      })();
+    </script>
+  
+    <link rel="manifest" href="/miqat/app/manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="/miqat/app/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/miqat/app/icons/apple-touch-icon.png" />
+    <script>
+      // A link straight to a screen (/miqat/app/dua/222) that GitHub Pages didn't
+      // have arrives from the site's 404 page as ?route=/dua/222; put the
+      // address back before the router reads it.
+      (function () {
+        var route = new URLSearchParams(location.search).get('route');
+        if (route && route.charAt(0) === '/' && route.charAt(1) !== '/') {
+          history.replaceState(null, '', '/miqat/app' + route);
+        }
+      })();
+      // Keep the app on the phone for offline use (scripts/web/sw.js), and
+      // ask the browser not to clear it when space runs low.
+      if ('serviceWorker' in navigator) {
+        addEventListener('load', function () {
+          navigator.serviceWorker.register('/miqat/app/sw.js', { scope: '/miqat/app/', updateViaCache: 'none' });
+          if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <noscript>Miqat needs JavaScript to run.</noscript>
+    <div id="root"></div>
+  <script src="/miqat/app/_expo/static/js/web/entry-9e3eba1095c6ef9e290fca3956a427b2.js" defer></script>
+</body>
+</html>

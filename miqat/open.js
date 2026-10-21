@@ -1,6 +1,8 @@
 // Opens a shared dua or list in the Miqat app. The page's <body data-kind>
 // says which; the ids come from the link (see src/features/share/links.ts).
 // On Android with App Links verified, the app opens before this page loads.
+// Elsewhere (iPhone, computers) the button opens the web app, miqat/app/,
+// at the same screen.
 (function () {
   var kind = document.body.getAttribute('data-kind');
   var params = new URLSearchParams(location.search);
@@ -29,13 +31,13 @@
   });
 
   // Android: an intent link names the package, and comes back here with
-  // #no-app when Miqat isn't installed. Elsewhere, the app's own scheme.
+  // #no-app when Miqat isn't installed. Elsewhere, the web app.
   var android = /Android/i.test(navigator.userAgent);
   var page = location.href.split('#')[0];
   var href = android
     ? 'intent://' + route + '#Intent;scheme=miqat;package=com.moazmahmud.miqat;S.browser_fallback_url=' +
       encodeURIComponent(page + '#no-app') + ';end'
-    : 'miqat://' + route;
+    : '/miqat/app/' + route;
   document.getElementById('open').setAttribute('href', href);
 
   function showNoApp() {

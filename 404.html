@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Page not found · Moaz Mahmud</title>
+    <script>
+      // Miqat's web app (miqat/app/) is one page, and GitHub Pages has no file
+      // for a screen's own address, such as miqat/app/dua/222. Send it to the
+      // app with the screen in ?route=; the app puts the address back.
+      (function () {
+        var base = '/miqat/app';
+        var path = location.pathname;
+        if (path.indexOf(base + '/') === 0) {
+          location.replace(base + '/?route=' + encodeURIComponent(path.slice(base.length) + location.search + location.hash));
+        }
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: system-ui, sans-serif;
+        background: #0f0f0f;
+        color: #e8e8e8;
+      }
+      a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Page not found</h1>
+      <p><a href="/">Go to moazmahmud.com</a></p>
+    </main>
+  </body>
+</html>
