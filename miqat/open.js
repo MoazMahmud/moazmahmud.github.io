@@ -1,5 +1,7 @@
-// Opens a shared dua or list in the Miqat app. The page's <body data-kind>
-// says which; the ids come from the link (see src/features/share/links.ts).
+// Opens a shared dua, list, surah or ayah in the Miqat app. The page's
+// <body data-kind> says which; the ids come from the link (see
+// src/features/share/links.ts). Each surah has its own page, quran/<n>.html,
+// written by the app repo's scripts/share-pages.mjs.
 // On Android with App Links verified, the app opens before this page loads.
 // Elsewhere (iPhone, computers) the button opens the web app, miqat/app/,
 // at the same screen.
@@ -10,9 +12,18 @@
 
   var route;
   var count = 0;
+  var ayah = 0;
   if (kind === 'dua') {
     var id = params.get('id') || '';
     route = safe.test(id) ? 'dua/' + id : 'duas';
+  } else if (kind === 'quran') {
+    // The surah's page names it; ?ayah= picks an ayah, else the first.
+    var surah = Number(document.body.getAttribute('data-surah'));
+    var asked = params.get('ayah') || '';
+    if (/^\d{1,3}$/.test(asked) && asked >= 1 && asked <= Number(document.body.getAttribute('data-ayahs'))) {
+      ayah = Number(asked);
+    }
+    route = 'quran/' + surah + '?ayah=' + (ayah || 1);
   } else {
     var ids = (params.get('ids') || '').split(/[.,]/).filter(function (x) {
       return safe.test(x);
@@ -22,12 +33,17 @@
   }
 
   var bnDigits = '০১২৩৪৫৬৭৮৯';
+  function digits(text, lang) {
+    return lang === 'bn' ? text.replace(/\d/g, function (d) { return bnDigits[d]; }) : text;
+  }
   document.querySelectorAll('[data-count]').forEach(function (el) {
-    var n = String(count);
-    el.textContent =
-      el.getAttribute('data-count') === 'bn'
-        ? n.replace(/\d/g, function (d) { return bnDigits[d]; })
-        : n;
+    el.textContent = digits(String(count), el.getAttribute('data-count'));
+  });
+  // " (ayah {n})" after the surah's name, for a link to one ayah.
+  document.querySelectorAll('[data-ref]').forEach(function (el) {
+    el.textContent = ayah
+      ? el.getAttribute('data-text').replace('{n}', digits(String(ayah), el.getAttribute('data-ref')))
+      : '';
   });
 
   // Android: an intent link names the package, and comes back here with
@@ -39,6 +55,9 @@
       encodeURIComponent(page + '#no-app') + ';end'
     : '/miqat/app/' + route;
   document.getElementById('open').setAttribute('href', href);
+  // The web app link, where a page has one, opens the same screen.
+  var web = document.getElementById('web');
+  if (web) web.setAttribute('href', '/miqat/app/' + route);
 
   function showNoApp() {
     document.body.classList.toggle('no-app', location.hash === '#no-app');
