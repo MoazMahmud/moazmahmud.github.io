@@ -25,11 +25,19 @@
     }
     route = 'quran/' + surah + '?ayah=' + (ayah || 1);
   } else {
+    // A list's items: dua ids, and Qur'an ranges such as q2-255 or q67, with
+    // _3 or _7 for repeats (src/features/share/links.ts in the app).
     var ids = (params.get('ids') || '').split(/[.,]/).filter(function (x) {
       return safe.test(x);
     });
     count = ids.length;
     route = 'shared-list?ids=' + ids.join('.');
+    var name = (params.get('name') || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+    if (name) route += '&name=' + encodeURIComponent(name);
+    document.querySelectorAll('[data-name]').forEach(function (el) {
+      el.textContent = name;
+      el.hidden = !name;
+    });
   }
 
   var bnDigits = '০১২৩৪৫৬৭৮৯';
