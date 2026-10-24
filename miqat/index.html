@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miqat · মীকাত — Umrah and Hajj companion</title>
-<meta name="description" content="A step-by-step companion for Umrah and Hajj: what to do now, what to recite now. Bangla first, English second. Works without the internet.">
+<meta name="description" content="A step-by-step companion for Umrah and Hajj: what to do now, what to recite now. With the Qur'an, Hisn al-Muslim duas, reading lists, prayer times, the Qibla and a Hijri calendar. Bangla first, English second. Works without the internet.">
 <meta property="og:title" content="মীকাত · Miqat — উমরাহ ও হজের গাইড">
-<meta property="og:description" content="A step-by-step guide to Umrah and Hajj, with duas, prayer times and the Qibla. Download for Android.">
+<meta property="og:description" content="A step-by-step guide to Umrah and Hajj, with the Qur'an, duas, your own reading lists, prayer times and the Qibla. Download for Android.">
 <meta property="og:image" content="https://moazmahmud.com/miqat/icon.png">
 <link rel="icon" href="icon.png" type="image/png">
 <link rel="apple-touch-icon" href="icon.png">
@@ -157,6 +157,18 @@
     font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
     padding:6px 11px; border:1px solid var(--border); border-radius:3px;
   }
+  .feature ul + .chip-row{margin-top:18px;}
+  .try-lists{margin-top:22px; max-width:520px;}
+  .try-label{font-family:var(--font-mono); font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:10px;}
+  .try-list{
+    display:block; padding:12px 16px; margin-bottom:10px; min-height:44px;
+    background:var(--bg-alt); border:1px solid var(--border); border-left:2px solid var(--accent); border-radius:4px;
+    transition:border-color 0.2s ease;
+  }
+  .try-list:hover{border-color:var(--accent);}
+  .try-list .bn{display:block; color:var(--text); font-size:17px; font-weight:600; line-height:1.5;}
+  .try-desc{display:block; color:var(--text-dim); font-size:13.5px; line-height:1.5;}
+  .source-card p strong{color:var(--text); font-weight:500;}
 
   /* SOURCES */
   .source-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
@@ -262,8 +274,8 @@
         <img class="app-icon" src="icon.png" alt="Miqat app icon" width="88" height="88">
         <h1>Miqat <span class="bn" lang="bn">মীকাত</span></h1>
       </div>
-      <p class="hero-desc">A step-by-step companion for Umrah and Hajj: <strong>what to do now, and what to recite now.</strong> Bangla first, English second. Works without the internet.</p>
-      <p class="hero-bn bn" lang="bn">উমরাহ ও হজের ধাপে ধাপে গাইড: এখন কী করবেন, কী পড়বেন, অডিওসহ দোয়া, নামাজের সময় ও কিবলা।</p>
+      <p class="hero-desc">A step-by-step companion for Umrah and Hajj: <strong>what to do now, and what to recite now.</strong> With the Qur'an, Hisn al-Muslim and your own reading lists of duas and ayahs. Bangla first, English second. Works without the internet.</p>
+      <p class="hero-bn bn" lang="bn">উমরাহ ও হজের ধাপে ধাপে গাইড: এখন কী করবেন, কী পড়বেন। সাথে কুরআন, অডিওসহ দোয়া, দোয়া ও আয়াত মিলিয়ে নিজের তালিকা, নামাজের সময়, কিবলা ও হিজরি ক্যালেন্ডার।</p>
       <div class="hero-links">
         <a href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing" class="btn primary" rel="noopener">Download for Android →</a>
         <a href="#demo" class="btn ghost">Watch the demo</a>
@@ -282,11 +294,11 @@
         </div>
         <div class="stat-item">
           <div class="stat-val">421</div>
-          <div class="stat-label">Duas from Hisn al-Muslim</div>
+          <div class="stat-label">Duas from Hisn al-Muslim, 313 with audio</div>
         </div>
         <div class="stat-item">
-          <div class="stat-val">313</div>
-          <div class="stat-label">Duas with audio</div>
+          <div class="stat-val">114</div>
+          <div class="stat-label">Surahs, with tafsir and 14 qaris</div>
         </div>
       </div>
     </div>
@@ -302,15 +314,16 @@
           <li><strong>What do I do now?</strong>One card per step, in order, with a progress bar. Tap Done and the next step comes up.</li>
           <li><strong>What do I say now?</strong>The words for that moment, in Arabic, with transliteration, meaning, source and audio.</li>
         </ul>
-        <p>It also has to work where pilgrims actually are. The mobile network in Mina and Arafah is unreliable, so <strong>everything runs on the phone</strong>: the guides, the dua library, prayer times and the Qibla.</p>
+        <p>It also has to work where pilgrims actually are. The mobile network in Mina and Arafah is unreliable, so <strong>everything runs on the phone</strong>: the guides, the dua library, the Qur'an, prayer times and the Qibla.</p>
+        <p>And it should stay useful after the pilgrimage. Version 0.2.0 adds the whole Qur'an and <strong>reading lists</strong>: duas and any part of the Qur'an in one list, in your order, each repeated as many times as you read it, played from start to end.</p>
       </div>
       <div class="demo" id="demo">
-        <div class="demo-label">Demo · Miqat 0.1.0</div>
+        <div class="demo-label">Demo · Miqat 0.2.0</div>
         <div class="phone">
-          <iframe src="https://drive.google.com/file/d/1T8bIO4LNQbphW4JwlaHyhblDZRsNtyQw/preview" title="Miqat demo video" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://drive.google.com/file/d/1gRxzlDtLcgAkeFpZy46kLqoz631NMjaV/preview" title="Miqat demo video" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="demo-links">
-          <a href="https://drive.google.com/file/d/1T8bIO4LNQbphW4JwlaHyhblDZRsNtyQw/view" rel="noopener">Open the video ↗</a>
+          <a href="https://drive.google.com/file/d/1gRxzlDtLcgAkeFpZy46kLqoz631NMjaV/view" rel="noopener">Open the video ↗</a>
           <a href="https://drive.google.com/drive/folders/1X2UBzFI2aCc7VgsddVEdl4WWnuK6PfWz?usp=sharing" rel="noopener">Drive folder ↗</a>
         </div>
       </div>
@@ -350,17 +363,18 @@
         </ul>
       </div>
       <div class="shots">
-        <figure class="shot"><img src="screenshots/home.png" alt="Home screen with the Umrah card, the current prayer and the Qibla" width="540" height="1200" loading="lazy"><figcaption>Home</figcaption></figure>
-        <figure class="shot"><img src="screenshots/umrah-guide.png" alt="Umrah guide, step 1: ihram and intention" width="540" height="1200" loading="lazy"><figcaption>Umrah guide</figcaption></figure>
-        <figure class="shot"><img src="screenshots/hajj-guide.png" alt="Hajj guide, 8 Dhul Hijjah: Hajj ihram" width="540" height="1200" loading="lazy"><figcaption>Hajj guide</figcaption></figure>
+        <figure class="shot"><img src="screenshots/home.png" alt="Home screen with the Tawaf in progress, the current prayer and this week" width="540" height="1200" loading="lazy"><figcaption>Home</figcaption></figure>
+        <figure class="shot"><img src="screenshots/umrah-guide.png" alt="Umrah guide, step 3: entering Masjid al-Haram" width="540" height="1200" loading="lazy"><figcaption>Umrah guide</figcaption></figure>
+        <figure class="shot"><img src="screenshots/hajj-guide.png" alt="Hajj guide, 9 Dhul Hijjah: standing at Arafah" width="540" height="1200" loading="lazy"><figcaption>Hajj guide</figcaption></figure>
       </div>
     </div>
 
     <div class="feature">
       <div>
-        <span class="feature-tag">Tawaf and Sa‘i</span>
-        <h3>Round counters that show what to say where</h3>
+        <span class="feature-tag">Step details, Tawaf and Sa‘i</span>
+        <h3>Each step in full, and counters that show what to say where</h3>
         <ul>
+          <li><strong>Details</strong> on each card open the step's full page from the two booklets: what to do, what's sunnah and what to recite, with the hadith behind it.</li>
           <li>Count your rounds with a large button, and undo a mistaken tap.</li>
           <li>A diagram shows the Black Stone, the Yemeni Corner and the Hatim, or Safa, Marwah and the green lights.</li>
           <li>Only words with an authentic source: "Allāhu akbar" at the Black Stone <span class="ref">Bukhari 1613</span>, <em>Rabbanā ātinā…</em> between the Yemeni Corner and the Black Stone <span class="ref">2:201</span>, and the dhikr on Safa and Marwah <span class="ref">Muslim 1218</span>.</li>
@@ -368,7 +382,51 @@
         </ul>
       </div>
       <div class="shots">
+        <figure class="shot"><img src="screenshots/step-details.png" alt="The Arafah step in full: what to do and what's sunnah, with references" width="540" height="1200" loading="lazy"><figcaption>Step details</figcaption></figure>
         <figure class="shot"><img src="screenshots/tawaf.png" alt="Tawaf counter on round 3 of 7 with the Kaaba diagram" width="540" height="1200" loading="lazy"><figcaption>Tawaf counter</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">Reading lists · new in 0.2.0</span>
+        <h3>Your daily reading: duas and ayahs in one list</h3>
+        <ul>
+          <li><strong>Mix duas and the Qur'an:</strong> a dua from the library, one ayah, a range of ayahs or a whole surah, in your order.</li>
+          <li><strong>Repeat each item</strong> as many times as you read it, from 1 to 1000. Play the list once or on a loop.</li>
+          <li><strong>Plays in order</strong>, with the screen following along: the list scrolls to the item, the reader marks the ayah and a dua's page marks the line. It keeps playing with the screen locked.</li>
+          <li><strong>Kept on the phone:</strong> the audio of everything in your lists is downloaded, so a list plays without the internet.</li>
+          <li><strong>Saved</strong> holds what you bookmark. Name as many other lists as you like, and drag to reorder.</li>
+          <li><strong>Share a list as a link.</strong> Whoever opens it gets the same list, with its name, and adds it with one tap.</li>
+        </ul>
+        <div class="try-lists">
+          <div class="try-label">Try a shared list</div>
+          <a href="https://moazmahmud.com/miqat/list/?ids=q1.q2-255.q2-284-286.q67.q55-1-10.q18-1-10.q36&amp;name=%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%E0%A6%B0%20%E0%A6%86%E0%A6%AE%E0%A6%B2" class="try-list" rel="noopener"><span class="bn" lang="bn">রাতের আমল</span><span class="try-desc">Night reading: al-Fatiha, Ayat al-Kursi, the end of al-Baqarah, al-Mulk, ar-Rahman 1–10, al-Kahf 1–10, Ya-Sin</span></a>
+          <a href="https://moazmahmud.com/miqat/list/?ids=q1.q2-255.q2-285-286.q113_3.q112_3.q114_3&amp;name=%E0%A6%B0%E0%A7%81%E0%A6%95%E0%A6%87%E0%A7%9F%E0%A6%BE%E0%A6%B9" class="try-list" rel="noopener"><span class="bn" lang="bn">রুকইয়াহ</span><span class="try-desc">Ruqyah: al-Fatiha, Ayat al-Kursi, al-Baqarah 285–286, and the three Quls three times each</span></a>
+        </div>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/my-lists.png" alt="My lists: Saved and three named lists" width="540" height="1200" loading="lazy"><figcaption>My lists</figcaption></figure>
+        <figure class="shot"><img src="screenshots/list.png" alt="A reading list of ayahs and duas, each with its repeat count, playing" width="540" height="1200" loading="lazy"><figcaption>A list playing</figcaption></figure>
+        <figure class="shot"><img src="screenshots/shared-list.png" alt="A shared list opened from a link, ready to add" width="540" height="1200" loading="lazy"><figcaption>Opened from a link</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div>
+        <span class="feature-tag">The Qur'an · new in 0.2.0</span>
+        <h3>The whole Qur'an, with translation, tafsir and recitation</h3>
+        <ul>
+          <li><strong>All 114 surahs</strong> in the Uthmani script, or in the IndoPak script with the Hafezi or Kolkata font.</li>
+          <li><strong>Translation</strong> in Bangla (Abu Bakr Zakaria) or English (Saheeh International), with the translators' notes.</li>
+          <li><strong>Tafsir:</strong> al-Mukhtasar in Bangla and English is on the phone. Ahsanul Bayaan and Ibn Kathir load from Quran.com and stay once read.</li>
+          <li><strong>Recitation</strong> ayah by ayah from 14 qaris, among them the imams of the Haram, Alafasy, Abdul Basit, Husary and Minshawi. Download a surah to hear it offline.</li>
+          <li><strong>Search</strong> by surah name, number or ayah (<span class="ref">2:255</span>). Share a surah or an ayah as a link.</li>
+        </ul>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/quran-reader.png" alt="Qur'an reader at Ayat al-Kursi with the Bangla translation" width="540" height="1200" loading="lazy"><figcaption>Reader</figcaption></figure>
+        <figure class="shot"><img src="screenshots/quran-tafsir.png" alt="Tafsir Ahsanul Bayaan on 2:201" width="540" height="1200" loading="lazy"><figcaption>Tafsir</figcaption></figure>
       </div>
     </div>
 
@@ -381,30 +439,31 @@
           <li><strong>Audio for 313 duas.</strong> Each line highlights while it plays. The guide's duas download on first launch and stay on the phone.</li>
           <li><strong>Memorize mode</strong> blurs the text while the audio is paused. Tap a line to reveal it and play from there.</li>
           <li><strong>Search</strong> by words or by Hisn al-Muslim number.</li>
-          <li><strong>My list:</strong> add duas from the library, drag to reorder, swipe to remove, play them all in order, and share the list or a single dua as a link.</li>
+          <li><strong>Bookmark</strong> a dua to keep it in Saved, add it to any list, or share it as a link.</li>
         </ul>
       </div>
       <div class="shots">
         <figure class="shot"><img src="screenshots/dua.png" alt="The Talbiyah with Arabic, transliteration, meaning and source" width="540" height="1200" loading="lazy"><figcaption>Dua</figcaption></figure>
-        <figure class="shot"><img src="screenshots/duas.png" alt="Dua library filtered to Hajj and Umrah" width="540" height="1200" loading="lazy"><figcaption>Library</figcaption></figure>
-        <figure class="shot"><img src="screenshots/my-list.png" alt="My list with three duas and a Play all button" width="540" height="1200" loading="lazy"><figcaption>My list</figcaption></figure>
+        <figure class="shot"><img src="screenshots/duas.png" alt="Dua library in the Read tab" width="540" height="1200" loading="lazy"><figcaption>Library</figcaption></figure>
       </div>
     </div>
 
     <div class="feature">
       <div>
-        <span class="feature-tag">Prayer and Qibla</span>
+        <span class="feature-tag">Prayer, Qibla and calendar</span>
         <h3>Calculated on the phone, wherever you are</h3>
         <ul>
           <li><strong>Prayer times</strong> use Umm al-Qura in Saudi Arabia, and Karachi with Hanafi Asr in Bangladesh. You can change the method and switch Asr between Standard and Hanafi.</li>
           <li><strong>The day is shown as segments.</strong> Forbidden times (sunrise, zawal, sunset) appear as red rows, and Duha is always marked nafl.</li>
-          <li><strong>Reminders</strong> come at each prayer time and work offline.</li>
+          <li><strong>Reminders</strong> come at each prayer time and work offline. On Fridays, Dhuhr is called Jumu‘ah.</li>
           <li><strong>Qibla compass</strong> with the bearing and the distance to the Kaaba, and a tip to calibrate when the compass is unsure. Within 500 km of Makkah it asks for GPS, because a city's centre point gives the wrong direction that close to the Kaaba.</li>
+          <li><strong>Calendar:</strong> Hijri and Gregorian months side by side, with Ramadan, the Eids, the days of Hajj, Ashura and the white days marked. Days the schools differ on are left out.</li>
         </ul>
       </div>
       <div class="shots">
-        <figure class="shot"><img src="screenshots/prayer.png" alt="Prayer times in Makkah with Asr running and forbidden times in red" width="540" height="1200" loading="lazy"><figcaption>Prayer times</figcaption></figure>
-        <figure class="shot"><img src="screenshots/qibla.png" alt="Qibla compass pointing at 289 degrees, 5.8 km to the Kaaba" width="540" height="1200" loading="lazy"><figcaption>Qibla</figcaption></figure>
+        <figure class="shot"><img src="screenshots/prayer.png" alt="Prayer times in Makkah with Duha, marked nafl, running and forbidden times in red" width="540" height="1200" loading="lazy"><figcaption>Prayer times</figcaption></figure>
+        <figure class="shot"><img src="screenshots/qibla.png" alt="Qibla compass from Aziziyah, Makkah" width="540" height="1200" loading="lazy"><figcaption>Qibla</figcaption></figure>
+        <figure class="shot"><img src="screenshots/calendar.png" alt="Calendar with Hijri and Gregorian dates and the white days" width="540" height="1200" loading="lazy"><figcaption>Calendar</figcaption></figure>
       </div>
     </div>
 
@@ -412,16 +471,24 @@
       <div>
         <span class="feature-tag">Made for reading</span>
         <h3>Comfortable in Bangla, English and Arabic</h3>
+        <ul>
+          <li><strong>Four Arabic fonts:</strong> Scheherazade New, Noto Naskh Arabic, and the two most Bangladeshis learned to read in, <strong>Hafezi (IndoPak)</strong> and <strong>Kolkata print</strong>. With these two, the Qur'an switches to the IndoPak script, with its stop signs and ayah markers.</li>
+          <li>The Kolkata font is our own build of a 2011 font, with fixed letters and spacing and the Qur'anic signs it lacked.</li>
+        </ul>
         <div class="chip-row">
           <span class="chip">বাংলা + English</span>
           <span class="chip">Bangla digits and dates</span>
           <span class="chip">Light and dark themes</span>
           <span class="chip">Four text sizes</span>
           <span class="chip">Separate Arabic size</span>
-          <span class="chip">Scheherazade New or Noto Naskh Arabic</span>
           <span class="chip">Works offline</span>
           <span class="chip">No account</span>
         </div>
+      </div>
+      <div class="shots">
+        <figure class="shot"><img src="screenshots/quran-kolkata.png" alt="Surah al-Mulk in the Kolkata print font" width="540" height="1200" loading="lazy"><figcaption>Kolkata print</figcaption></figure>
+        <figure class="shot"><img src="screenshots/dua-indopak.png" alt="Sayyid al-Istighfar in the Hafezi (IndoPak) font" width="540" height="1200" loading="lazy"><figcaption>Hafezi</figcaption></figure>
+        <figure class="shot"><img src="screenshots/fonts.png" alt="The four Arabic fonts in Settings" width="540" height="1200" loading="lazy"><figcaption>Arabic fonts</figcaption></figure>
       </div>
     </div>
   </section>
@@ -448,6 +515,26 @@
       </div>
 
       <div class="source-card">
+        <h3>The Qur'an</h3>
+        <div class="source-meta">Text and translations, checked letter by letter</div>
+        <ul>
+          <li>Uthmani text: <a href="https://tanzil.net" rel="noopener">Tanzil</a> (CC BY 3.0, verbatim)</li>
+          <li>IndoPak text: <a href="https://quran.com" rel="noopener">Quran.com</a></li>
+          <li>Bangla: Abu Bakr Zakaria, and English: Saheeh International, with their notes, from <a href="https://quranenc.com" rel="noopener">QuranEnc</a></li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3>Tafsir and recitation</h3>
+        <div class="source-meta">QuranEnc · Quran.com · EveryAyah</div>
+        <ul>
+          <li>Al-Mukhtasar in Bangla and English, from <a href="https://quranenc.com" rel="noopener">QuranEnc</a>, on the phone</li>
+          <li>Ahsanul Bayaan and Ibn Kathir from <a href="https://quran.com" rel="noopener">Quran.com</a>, kept once read</li>
+          <li>Recitation by 14 qaris, one file per ayah, from <a href="https://everyayah.com" rel="noopener">EveryAyah</a></li>
+        </ul>
+      </div>
+
+      <div class="source-card">
         <h3>Prayer times and Qibla</h3>
         <div class="source-meta">MIT license</div>
         <p><a href="https://github.com/batoulapps/adhan-js" rel="noopener">adhan-js</a> by Batoul Apps calculates the prayer times and the Qibla bearing on the phone.</p>
@@ -471,6 +558,13 @@
       </div>
 
       <div class="source-card">
+        <h3>Hafezi and Kolkata print</h3>
+        <div class="source-meta">The two styles most Bangladeshis learned to read in</div>
+        <p><strong>IndoPak Nastaleeq</strong> by <a href="https://quranwbw.com" rel="noopener">QuranWBW</a>, the font Quran.com uses.</p>
+        <p><strong>Al Qalam Kolkata Miqat</strong>, our build of the 2011 <em>Al Qalam Kolkatta Quranic font</em> by Syed Shakir ul Qadree and Ishtiaq Ali (<a href="https://alqlm.org" rel="noopener">Al Qalam</a>), with fixed letters and spacing, and the Qur'anic stop signs it lacked. Still experimental.</p>
+      </div>
+
+      <div class="source-card">
         <h3>Built with</h3>
         <div class="source-meta">Expo · React Native · TypeScript</div>
         <div class="chip-row">
@@ -480,6 +574,7 @@
           <span class="chip">expo-notifications</span>
           <span class="chip">expo-sqlite</span>
           <span class="chip">Reanimated</span>
+          <span class="chip">Gesture Handler</span>
           <span class="chip">i18next</span>
           <span class="chip">Zustand</span>
         </div>
@@ -501,9 +596,11 @@
       </div>
       <div class="note-box">
         <h3>Privacy</h3>
-        <p>There is no backend and no account. Your location, progress and dua list stay on your phone. The app connects to the internet only to:</p>
+        <p>There is no backend and no account. Your location, progress and lists stay on your phone. The app connects to the internet only to:</p>
         <ul>
           <li>download dua audio from GTAF</li>
+          <li>play or download Qur'an recitation from EveryAyah</li>
+          <li>load the online tafsirs from Quran.com</li>
           <li>check the Saudi Hijri date with Aladhan</li>
           <li>name a GPS location, using the phone's own geocoder</li>
         </ul>
@@ -536,8 +633,8 @@
           <div class="en">Android may warn you because the app isn’t from the Play Store. Choose to install anyway.</div>
         </li>
         <li>
-          <div class="bn" lang="bn">নতুন সংস্করণ এলে একইভাবে ইনস্টল করুন। আপনার দোয়ার তালিকা ও অগ্রগতি থেকে যাবে।</div>
-          <div class="en">To update, install a newer file the same way. Your dua list and progress stay.</div>
+          <div class="bn" lang="bn">নতুন সংস্করণ এলে একইভাবে ইনস্টল করুন। আপনার তালিকা ও অগ্রগতি থেকে যাবে।</div>
+          <div class="en">To update, install a newer file the same way. Your lists and progress stay.</div>
         </li>
       </ol>
     </div>
