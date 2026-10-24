@@ -1,4 +1,4 @@
-const VERSION = 'ccc69f75ad66';
+const VERSION = '926c1318cb2f';
 const BASE = '/miqat/app/';
 const SHELL = [
   "icons/apple-touch-icon.png",
@@ -493,7 +493,30 @@ const CORE = [
   "assets/src/content/quran/trans/en_saheeh/112.6032c08cb9ef470ba1daddf035845ad1.txt",
   "assets/src/content/quran/trans/en_saheeh/113.caa28ab76e1bf808f19f5ddaa231a3a3.txt",
   "assets/src/content/quran/trans/en_saheeh/114.3da8c41191e6e9df3ba7211ae2368239.txt",
-  "_expo/static/js/web/entry-e9f832ca5345304e8ce8cf57dbcb14f5.js"
+  "_expo/static/js/web/calendar-fc4e391a4adc20fb0eb3389f9511451a.js",
+  "_expo/static/js/web/duas-1fb2f65066b821178836feec04098cee.js",
+  "_expo/static/js/web/entry-786bdebbc6aa8e580a71baf15b3aa665.js",
+  "_expo/static/js/web/font-review-b06f6dbc16b785c81b5759f2a6c731d7.js",
+  "_expo/static/js/web/guide-80090b00ce6e2bedbb8ab9d9d6f4376d.js",
+  "_expo/static/js/web/index-7df1a6fab0d407080efb523f80801cb2.js",
+  "_expo/static/js/web/index-f56a16f9e58f3795a3799fc731b86ffe.js",
+  "_expo/static/js/web/prayer-c21826dcc08c92e02cf737d413cc5010.js",
+  "_expo/static/js/web/qibla-f97cd90823dd2fc9cea4b4ee0ec19b65.js",
+  "_expo/static/js/web/read-78669f7bd0d96eeb1af640c4e7884022.js",
+  "_expo/static/js/web/sai-c21b3a03777c6b38d1d02f02e35755c1.js",
+  "_expo/static/js/web/settings-7efcbefea9bc415d453380205b68ecbd.js",
+  "_expo/static/js/web/shared-list-a693d767e8aa1487265ec6d2dc291954.js",
+  "_expo/static/js/web/sources-271ae9d6d1a312c757a76f2fde5e904c.js",
+  "_expo/static/js/web/step-6aa23722240a5953aa7a89bdb727fd8a.js",
+  "_expo/static/js/web/tafsir-50577e24aa4a5a171d99d3dc459d4b2f.js",
+  "_expo/static/js/web/tawaf-9d1b90685c09d029ac46324fd334cf44.js",
+  "_expo/static/js/web/%5Bid%5D-5801eb50f3282b34fb33693173d641f8.js",
+  "_expo/static/js/web/%5Bid%5D-9daa0451c8eb740075aa4f286757522c.js",
+  "_expo/static/js/web/%5Bsurah%5D-a36fc2c0170418a48a8f841e4a520eed.js",
+  "_expo/static/js/web/_layout-08428a5b241869da8d96a217bc4cd9ca.js",
+  "_expo/static/js/web/_layout-b52aca240b6018c7d83fbe834c944bda.js",
+  "_expo/static/js/web/__common-e6705f0981106d592a91b1b54a6199a5.js",
+  "_expo/static/js/web/__expo-metro-runtime-97703ae02682710149335928b974f18d.js"
 ];
 const LAZY = [
   "assets/src/content/quran/notes/bn_zakaria/001.8a620e3a3c749735fda24655ed80583a.txt",
